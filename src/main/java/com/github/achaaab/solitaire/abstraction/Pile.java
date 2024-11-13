@@ -1,40 +1,54 @@
 package com.github.achaaab.solitaire.abstraction;
 
+import static com.github.achaaab.solitaire.abstraction.Rank.KING;
 import static com.github.achaaab.solitaire.abstraction.Solitaire.PILE_COUNT;
 
 /**
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public class Pile {
+public class Pile extends Stack {
 
-	public static final int HIDDEN_CAPACITY = PILE_COUNT;
-	public static final int VISIBLE_CAPACITY = Rank.COUNT;
-
-	protected final FaceDownStack faceDownStack;
-	protected final AlternateStack faceUpStack;
-
-	/**
-	 * @since 0.0.0
-	 */
-	public Pile(FaceDownStack faceDownStack, AlternateStack faceUpStack) {
-
-		this.faceDownStack = faceDownStack;
-		this.faceUpStack = faceUpStack;
-	}
+	public static final int CAPACITY = PILE_COUNT + Rank.COUNT;
 
 	/**
 	 * @return
 	 * @since 0.0.0
 	 */
 	public boolean canFlip() {
-		return !faceDownStack.isEmpty() && faceUpStack.isEmpty();
+		return !isEmpty() && !getFirst().isFaceUp();
 	}
 
 	/**
 	 * @since 0.0.0
 	 */
 	public void flip() {
-		faceUpStack.push(faceDownStack.pop());
+		getFirst().setFaceUp(true);
+	}
+
+	@Override
+	public boolean canPush(Card card) {
+
+		boolean canPush;
+
+		if (isEmpty()) {
+
+			canPush = card.getRank() == KING;
+
+		} else {
+
+			var firstCard = getFirst();
+
+			canPush = firstCard.isFaceUp() &&
+					firstCard.getRank().ordinal() == card.getRank().ordinal() + 1 &&
+					firstCard.getSuit().isRed() != card.getSuit().isRed();
+		}
+
+		return canPush;
+	}
+
+	@Override
+	public boolean canPush(Stack stack) {
+		return stack.isEmpty() || stack.isAlternate() && canPush(stack.getLast());
 	}
 }

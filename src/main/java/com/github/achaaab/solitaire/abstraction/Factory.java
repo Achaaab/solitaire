@@ -14,7 +14,7 @@ public class Factory {
 	 */
 	public Stack newDeck() {
 
-		var deck = newHiddenStack();
+		var deck = newStack();
 
 		for (var rank : Rank.values()) {
 
@@ -38,22 +38,8 @@ public class Factory {
 	/**
 	 * @return
 	 */
-	public Stack newHiddenStack() {
-		return newFaceUpStack();
-	}
-
-	/**
-	 * @return
-	 */
-	public FaceUpStack newFaceUpStack() {
-		return new FaceUpStack();
-	}
-
-	/**
-	 * @return
-	 */
-	public FaceDownStack newFaceDownStack() {
-		return new FaceDownStack();
+	public Stack newStack() {
+		return new Stack();
 	}
 
 	/**
@@ -66,15 +52,8 @@ public class Factory {
 	/**
 	 * @return
 	 */
-	public AlternateStack newAlternateStack() {
-		return new AlternateStack();
-	}
-
-	/**
-	 * @return
-	 */
 	public Pile newPile() {
-		return new Pile(newFaceDownStack(), newAlternateStack());
+		return new Pile();
 	}
 
 	/**

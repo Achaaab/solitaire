@@ -1,8 +1,7 @@
 package com.github.achaaab.solitaire.presentation;
 
-import com.github.achaaab.solitaire.abstraction.Rank;
-import com.github.achaaab.solitaire.control.TransferableStackControl;
 import com.github.achaaab.solitaire.control.FoundationControl;
+import com.github.achaaab.solitaire.control.TransferableStackControl;
 import com.github.achaaab.solitaire.presentation.audio.SoundEffect;
 import com.github.achaaab.solitaire.presentation.dragndrop.DragSourceManager;
 import com.github.achaaab.solitaire.presentation.dragndrop.DropTargetManager;

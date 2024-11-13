@@ -1,7 +1,7 @@
 package com.github.achaaab.solitaire.presentation.dragndrop;
 
 import com.github.achaaab.solitaire.control.TransferableStackControl;
-import com.github.achaaab.solitaire.control.dragndrop.StackSourceControl;
+import com.github.achaaab.solitaire.control.StackSourceControl;
 import com.github.achaaab.solitaire.presentation.CardPresentation;
 
 import javax.swing.JComponent;

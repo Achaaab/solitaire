@@ -1,6 +1,4 @@
-package com.github.achaaab.solitaire.control.dragndrop;
-
-import com.github.achaaab.solitaire.control.TransferableStackControl;
+package com.github.achaaab.solitaire.control;
 
 /**
  * @author Jonathan Guéhenneux

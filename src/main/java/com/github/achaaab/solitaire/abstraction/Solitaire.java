@@ -57,19 +57,16 @@ public class Solitaire {
 		}
 
 		for (var pile : piles) {
-			transfer(pile.faceUpStack, deck);
+			transfer(pile, deck);
 		}
 
-		for (var pile : piles) {
-			transfer(pile.faceDownStack, deck);
-		}
-
+		deck.turnFaceDown();
 		shuffle(deck);
 
 		for (var pileIndex = 0; pileIndex < PILE_COUNT; pileIndex++) {
 
 			var pile = piles.get(pileIndex);
-			transfer(deck, pile.faceDownStack, pileIndex + 1);
+			transfer(deck, pile, pileIndex + 1);
 		}
 
 		for (var pile : piles) {

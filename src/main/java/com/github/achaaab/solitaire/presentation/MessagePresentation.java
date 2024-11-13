@@ -141,13 +141,6 @@ public class MessagePresentation extends JPanel {
 			textArea.setContentType("text/html");
 			textArea.setText(text);
 
-			/*
-			var document = textArea.getStyledDocument();
-			var center = new SimpleAttributeSet();
-			setAlignment(center, ALIGN_CENTER);
-			document.setParagraphAttributes(0, document.getLength(), center, false);
-			*/
-
 			setVisible(true);
 		});
 	}

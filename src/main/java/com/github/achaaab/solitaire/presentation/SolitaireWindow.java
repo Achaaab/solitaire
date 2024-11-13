@@ -18,6 +18,7 @@ public class SolitaireWindow extends JFrame {
 
 	/**
 	 * @param solitaire
+	 * @since 0.0.0
 	 */
 	public SolitaireWindow(SolitaireControl solitaire) {
 

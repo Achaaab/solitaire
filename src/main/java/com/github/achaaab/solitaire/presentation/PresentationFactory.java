@@ -1,18 +1,13 @@
 package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.CardControl;
+import com.github.achaaab.solitaire.control.FoundationControl;
+import com.github.achaaab.solitaire.control.PileControl;
 import com.github.achaaab.solitaire.control.SolitaireControl;
 import com.github.achaaab.solitaire.control.StockControl;
 import com.github.achaaab.solitaire.control.TransferableStackControl;
 import com.github.achaaab.solitaire.control.WasteControl;
-import com.github.achaaab.solitaire.control.FoundationControl;
-import com.github.achaaab.solitaire.control.pile.PileControl;
-import com.github.achaaab.solitaire.control.pile.PileFaceDownStackControl;
-import com.github.achaaab.solitaire.control.pile.PileFaceUpStackControl;
 import com.github.achaaab.solitaire.presentation.dragndrop.TransferableStackPresentation;
-import com.github.achaaab.solitaire.presentation.pile.PileFaceDownStackPresentation;
-import com.github.achaaab.solitaire.presentation.pile.PileFaceUpStackPresentation;
-import com.github.achaaab.solitaire.presentation.pile.PilePresentation;
 
 /**
  * @author Jonathan Guéhenneux
@@ -55,27 +50,7 @@ public class PresentationFactory {
 	 * @return
 	 */
 	public PilePresentation newPile(PileControl control) {
-
-		return new PilePresentation(
-				control.faceDownStack().getPresentation(),
-				control.faceUpStack().presentation(),
-				control);
-	}
-
-	/**
-	 * @param control
-	 * @return
-	 */
-	public PileFaceDownStackPresentation newPileFaceDownStack(PileFaceDownStackControl control) {
-		return new PileFaceDownStackPresentation(control);
-	}
-
-	/**
-	 * @param control
-	 * @return
-	 */
-	public PileFaceUpStackPresentation newPileFaceUpStack(PileFaceUpStackControl control) {
-		return new PileFaceUpStackPresentation(control);
+		return new PilePresentation(control);
 	}
 
 	/**

@@ -2,7 +2,7 @@ package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.SolitaireControl;
 import com.github.achaaab.solitaire.control.FoundationControl;
-import com.github.achaaab.solitaire.control.pile.PileControl;
+import com.github.achaaab.solitaire.control.PileControl;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -55,7 +55,7 @@ public class SolitairePresentation extends JPanel {
 
 		for (var pile : control.piles()) {
 
-			pilesPanel.add(((PileControl) pile).getPresentation());
+			pilesPanel.add(((PileControl) pile).presentation());
 			pilesPanel.add(createRigidArea(new Dimension(stackGap, 0)));
 		}
 

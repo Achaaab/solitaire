@@ -3,9 +3,6 @@ package com.github.achaaab.solitaire.control;
 import com.github.achaaab.solitaire.abstraction.Factory;
 import com.github.achaaab.solitaire.abstraction.Rank;
 import com.github.achaaab.solitaire.abstraction.Suit;
-import com.github.achaaab.solitaire.control.pile.PileControl;
-import com.github.achaaab.solitaire.control.pile.PileFaceDownStackControl;
-import com.github.achaaab.solitaire.control.pile.PileFaceUpStackControl;
 
 /**
  * @author Jonathan Guéhenneux
@@ -26,7 +23,7 @@ public class ControlFactory extends Factory {
 	}
 
 	@Override
-	public StackControl newHiddenStack() {
+	public StackControl newStack() {
 		return new StackControl();
 	}
 
@@ -42,21 +39,7 @@ public class ControlFactory extends Factory {
 
 	@Override
 	public PileControl newPile() {
-		return new PileControl(newPileFaceDownStack(), newPileFaceUpStack());
-	}
-
-	/**
-	 * @return
-	 */
-	public PileFaceDownStackControl newPileFaceDownStack() {
-		return new PileFaceDownStackControl();
-	}
-
-	/**
-	 * @return
-	 */
-	public PileFaceUpStackControl newPileFaceUpStack() {
-		return new PileFaceUpStackControl();
+		return new PileControl();
 	}
 
 	@Override

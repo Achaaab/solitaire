@@ -1,7 +1,6 @@
 package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.ControlFactory;
-import com.github.achaaab.solitaire.control.StockControl;
 import com.github.achaaab.solitaire.presentation.theme.ByronKnollTheme;
 
 import static com.github.achaaab.solitaire.abstraction.Stock.CAPACITY;
@@ -29,7 +28,7 @@ public class StockPresentationTest {
 		shuffle(deck);
 		var stock = ControlFactory.INSTANCE.newStock();
 
-		show(((StockControl) stock).presentation(), "Stock presentation test");
+		show(stock.presentation(), "Stock presentation test");
 
 		deck.stream().limit(CAPACITY).forEach(card -> {
 

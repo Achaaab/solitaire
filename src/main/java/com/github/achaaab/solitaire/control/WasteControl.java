@@ -2,7 +2,6 @@ package com.github.achaaab.solitaire.control;
 
 import com.github.achaaab.solitaire.abstraction.Card;
 import com.github.achaaab.solitaire.abstraction.Waste;
-import com.github.achaaab.solitaire.control.dragndrop.StackSourceControl;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 import com.github.achaaab.solitaire.presentation.WastePresentation;
 

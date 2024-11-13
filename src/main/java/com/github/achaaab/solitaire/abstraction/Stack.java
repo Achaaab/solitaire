@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public abstract class Stack extends LinkedList<Card> {
+public class Stack extends LinkedList<Card> {
 
 	/**
 	 * @param card
@@ -54,5 +54,14 @@ public abstract class Stack extends LinkedList<Card> {
 		while (!stack.isEmpty()) {
 			push(stack.pop());
 		}
+	}
+
+	/**
+	 * Turns all the cards of this stack face down.
+	 *
+	 * @since 0.0.0
+	 */
+	public void turnFaceDown() {
+		forEach(card -> card.setFaceUp(false));
 	}
 }

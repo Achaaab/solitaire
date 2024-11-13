@@ -1,6 +1,6 @@
 package com.github.achaaab.solitaire.presentation.dragndrop;
 
-import com.github.achaaab.solitaire.control.dragndrop.StackTargetControl;
+import com.github.achaaab.solitaire.control.StackTargetControl;
 
 import javax.swing.JComponent;
 import java.awt.datatransfer.UnsupportedFlavorException;

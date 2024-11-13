@@ -1,15 +1,9 @@
-package com.github.achaaab.solitaire.control.pile;
+package com.github.achaaab.solitaire.control;
 
-import com.github.achaaab.solitaire.abstraction.AlternateStack;
 import com.github.achaaab.solitaire.abstraction.Card;
-import com.github.achaaab.solitaire.control.CardControl;
-import com.github.achaaab.solitaire.control.ControlFactory;
-import com.github.achaaab.solitaire.control.TransferableStackControl;
-import com.github.achaaab.solitaire.control.dragndrop.StackSourceControl;
-import com.github.achaaab.solitaire.control.dragndrop.StackTargetControl;
-import com.github.achaaab.solitaire.control.MessageControl;
+import com.github.achaaab.solitaire.abstraction.Pile;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
-import com.github.achaaab.solitaire.presentation.pile.PileFaceUpStackPresentation;
+import com.github.achaaab.solitaire.presentation.PilePresentation;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
@@ -17,45 +11,19 @@ import static javax.swing.SwingUtilities.invokeLater;
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public class PileFaceUpStackControl extends AlternateStack implements StackSourceControl, StackTargetControl {
+public class PileControl extends Pile implements StackSourceControl, StackTargetControl {
 
 	private static int missedDropCount = 0;
 
-	private final PileFaceUpStackPresentation presentation;
-
-	private PileControl pile;
-	private TransferableStackControl draggedOutStack;
+	private final PilePresentation presentation;
 	private MessageControl message;
+	private TransferableStackControl draggedOutStack;
 
 	/**
 	 * @since 0.0.0
 	 */
-	public PileFaceUpStackControl() {
-		presentation = PresentationFactory.INSTANCE.newPileFaceUpStack(this);
-	}
-
-	/**
-	 * @param message
-	 * @since 0.0.0
-	 */
-	public void setMessage(MessageControl message) {
-		this.message = message;
-	}
-
-	/**
-	 * @return
-	 * @since 0.0.0
-	 */
-	public PileControl getPile() {
-		return pile;
-	}
-
-	/**
-	 * @param pile
-	 * @since 0.0.0
-	 */
-	public void setPile(PileControl pile) {
-		this.pile = pile;
+	public PileControl() {
+		presentation = PresentationFactory.INSTANCE.newPile(this);
 	}
 
 	@Override
@@ -75,13 +43,6 @@ public class PileFaceUpStackControl extends AlternateStack implements StackSourc
 		return card;
 	}
 
-	/**
-	 * @return
-	 */
-	public PileFaceUpStackPresentation presentation() {
-		return presentation;
-	}
-
 	@Override
 	public void dragOut(CardControl card) {
 
@@ -89,7 +50,7 @@ public class PileFaceUpStackControl extends AlternateStack implements StackSourc
 		var sourceLocation = card.getPresentation().getLocation();
 
 		draggedOutStack = ControlFactory.INSTANCE.newTransferableStack(cardIndex + 1);
-		var temporaryStack = ControlFactory.INSTANCE.newHiddenStack();
+		var temporaryStack = ControlFactory.INSTANCE.newStack();
 
 		while (temporaryStack.size() <= cardIndex) {
 			temporaryStack.push(pop());
@@ -113,7 +74,7 @@ public class PileFaceUpStackControl extends AlternateStack implements StackSourc
 
 		if (accepted) {
 
-			var temporaryStack = ControlFactory.INSTANCE.newHiddenStack();
+			var temporaryStack = ControlFactory.INSTANCE.newStack();
 			temporaryStack.push(stack);
 			push(temporaryStack);
 
@@ -154,16 +115,32 @@ public class PileFaceUpStackControl extends AlternateStack implements StackSourc
 	@Override
 	public void dropSucceeded(TransferableStackControl stack) {
 
-		if (pile.canFlip()) {
-			pile.flip();
+		if (canFlip()) {
+			flip();
 		}
 	}
 
 	@Override
 	public void dropFailed(TransferableStackControl stack) {
 
-		var temporaryStack = ControlFactory.INSTANCE.newHiddenStack();
+		var temporaryStack = ControlFactory.INSTANCE.newStack();
 		temporaryStack.push(stack);
 		push(temporaryStack);
+	}
+
+	/**
+	 * @param message
+	 * @since 0.0.0
+	 */
+	public void setMessage(MessageControl message) {
+		this.message = message;
+	}
+
+	/**
+	 * @return
+	 * @since 0.0.0
+	 */
+	public PilePresentation presentation() {
+		return presentation;
 	}
 }

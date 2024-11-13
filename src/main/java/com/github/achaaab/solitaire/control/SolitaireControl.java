@@ -1,8 +1,7 @@
 package com.github.achaaab.solitaire.control;
 
+import com.github.achaaab.solitaire.abstraction.Pile;
 import com.github.achaaab.solitaire.abstraction.Solitaire;
-import com.github.achaaab.solitaire.control.pile.PileControl;
-import com.github.achaaab.solitaire.control.pile.PileFaceUpStackControl;
 import com.github.achaaab.solitaire.presentation.SolitairePresentation;
 
 import java.awt.event.MouseAdapter;
@@ -31,8 +30,22 @@ public class SolitaireControl extends Solitaire {
 
 		for (var pile : piles) {
 
-			((PileControl) pile).faceUpStack().setMessage(message);
-			((PileControl) pile).setSolitaire(this);
+			var pileControl = (PileControl) pile;
+			pileControl.setMessage(message);
+
+			pileControl.presentation().addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseClicked(MouseEvent event) {
+
+					var button = event.getButton();
+					var clickCount = event.getClickCount();
+
+					if (button == BUTTON1 && clickCount == 2) {
+						moveToFoundation(pile);
+					}
+				}
+			});
 		}
 
 		for (var foundation : foundations()) {
@@ -70,18 +83,19 @@ public class SolitaireControl extends Solitaire {
 				}
 			}
 		});
+
 	}
 
 	/**
 	 * @param pile
 	 * @since 0.0.0
 	 */
-	public void moveToFoundation(PileFaceUpStackControl pile) {
+	public void moveToFoundation(Pile pile) {
 
 		super.moveToFoundation(pile);
 
-		if (pile.getPile().canFlip()) {
-			pile.getPile().flip();
+		if (pile.canFlip()) {
+			pile.flip();
 		}
 	}
 
