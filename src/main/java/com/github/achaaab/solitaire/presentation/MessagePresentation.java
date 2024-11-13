@@ -1,6 +1,6 @@
-package com.github.achaaab.solitaire.presentation.message;
+package com.github.achaaab.solitaire.presentation;
 
-import com.github.achaaab.solitaire.control.message.MessageControl;
+import com.github.achaaab.solitaire.control.MessageControl;
 import org.slf4j.Logger;
 
 import javax.swing.JButton;
@@ -47,7 +47,7 @@ public class MessagePresentation extends JPanel {
 	private static final Color TEXT_COLOR = new Color(16, 8, 8);
 	private static final Color VEIL_COLOR = new Color(0, 0, 0, 192);
 
-	private static final float FONT_SIZE = scaleFloat(14);
+	private static final float FONT_SIZE = scaleFloat(16);
 
 	private final JEditorPane textArea;
 

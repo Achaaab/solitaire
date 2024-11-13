@@ -3,14 +3,9 @@ package com.github.achaaab.solitaire.control;
 import com.github.achaaab.solitaire.abstraction.Factory;
 import com.github.achaaab.solitaire.abstraction.Rank;
 import com.github.achaaab.solitaire.abstraction.Suit;
-import com.github.achaaab.solitaire.control.foundation.FoundationControl;
-import com.github.achaaab.solitaire.control.message.MessageControl;
 import com.github.achaaab.solitaire.control.pile.PileControl;
 import com.github.achaaab.solitaire.control.pile.PileFaceDownStackControl;
 import com.github.achaaab.solitaire.control.pile.PileFaceUpStackControl;
-import com.github.achaaab.solitaire.control.talon.TalonControl;
-import com.github.achaaab.solitaire.control.talon.TalonFaceDownStackControl;
-import com.github.achaaab.solitaire.control.talon.TalonFaceUpStackControl;
 
 /**
  * @author Jonathan Guéhenneux
@@ -21,9 +16,12 @@ public class ControlFactory extends Factory {
 	public static final ControlFactory INSTANCE = new ControlFactory();
 
 	/**
-	 * le constructeur prive,juste pour empecher l'instanciation
+	 * Private constructor to force singleton usage.
+	 *
+	 * @see #INSTANCE
+	 * @since 0.0.0
 	 */
-	private ControlFactory(){
+	private ControlFactory() {
 
 	}
 
@@ -33,12 +31,12 @@ public class ControlFactory extends Factory {
 	}
 
 	@Override
-	public CardControl newCard(Rank rank, Suit suit){
+	public CardControl newCard(Rank rank, Suit suit) {
 		return new CardControl(rank, suit);
 	}
 
 	@Override
-	public FoundationControl newFoundation(){
+	public FoundationControl newFoundation() {
 		return new FoundationControl();
 	}
 
@@ -62,22 +60,13 @@ public class ControlFactory extends Factory {
 	}
 
 	@Override
-	public TalonControl newTalon() {
-		return new TalonControl(newTalonFaceDownStack(), newTalonFaceUpStack());
+	public StockControl newStock() {
+		return new StockControl();
 	}
 
-	/**
-	 * @return
-	 */
-	public TalonFaceDownStackControl newTalonFaceDownStack() {
-		return new TalonFaceDownStackControl();
-	}
-
-	/**
-	 * @return
-	 */
-	public TalonFaceUpStackControl newTalonFaceUpStack() {
-		return new TalonFaceUpStackControl();
+	@Override
+	public WasteControl newWaste() {
+		return new WasteControl();
 	}
 
 	/**

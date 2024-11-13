@@ -47,6 +47,7 @@ public abstract class Stack extends LinkedList<Card> {
 
 	/**
 	 * @param stack
+	 * @since 0.0.0
 	 */
 	public void push(Stack stack) {
 

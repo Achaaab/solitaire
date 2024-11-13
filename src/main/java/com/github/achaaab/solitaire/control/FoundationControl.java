@@ -1,15 +1,11 @@
-package com.github.achaaab.solitaire.control.foundation;
+package com.github.achaaab.solitaire.control;
 
 import com.github.achaaab.solitaire.abstraction.Card;
 import com.github.achaaab.solitaire.abstraction.Foundation;
-import com.github.achaaab.solitaire.control.CardControl;
-import com.github.achaaab.solitaire.control.ControlFactory;
-import com.github.achaaab.solitaire.control.TransferableStackControl;
 import com.github.achaaab.solitaire.control.dragndrop.StackSourceControl;
 import com.github.achaaab.solitaire.control.dragndrop.StackTargetControl;
-import com.github.achaaab.solitaire.control.message.MessageControl;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
-import com.github.achaaab.solitaire.presentation.foundation.FoundationPresentation;
+import com.github.achaaab.solitaire.presentation.FoundationPresentation;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
@@ -25,13 +21,11 @@ public class FoundationControl extends Foundation implements StackTargetControl,
 	private MessageControl message;
 
 	/**
-	 *
+	 * @since 0.0.0
 	 */
 	public FoundationControl() {
 		presentation = PresentationFactory.INSTANCE.newFoundation(this);
 	}
-
-
 
 	/**
 	 * @param message message

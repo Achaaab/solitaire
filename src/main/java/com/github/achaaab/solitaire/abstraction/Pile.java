@@ -15,7 +15,7 @@ public class Pile {
 	protected final AlternateStack faceUpStack;
 
 	/**
-	 *
+	 * @since 0.0.0
 	 */
 	public Pile(FaceDownStack faceDownStack, AlternateStack faceUpStack) {
 
@@ -25,13 +25,14 @@ public class Pile {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public boolean canFlip() {
 		return !faceDownStack.isEmpty() && faceUpStack.isEmpty();
 	}
 
 	/**
-	 *
+	 * @since 0.0.0
 	 */
 	public void flip() {
 		faceUpStack.push(faceDownStack.pop());

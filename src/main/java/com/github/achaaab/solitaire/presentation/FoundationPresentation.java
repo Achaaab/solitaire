@@ -1,16 +1,17 @@
-package com.github.achaaab.solitaire.presentation.talon;
+package com.github.achaaab.solitaire.presentation;
 
+import com.github.achaaab.solitaire.abstraction.Rank;
 import com.github.achaaab.solitaire.control.TransferableStackControl;
-import com.github.achaaab.solitaire.control.talon.TalonFaceUpStackControl;
-import com.github.achaaab.solitaire.presentation.CardPresentation;
-import com.github.achaaab.solitaire.presentation.StackPresentation;
+import com.github.achaaab.solitaire.control.FoundationControl;
 import com.github.achaaab.solitaire.presentation.audio.SoundEffect;
 import com.github.achaaab.solitaire.presentation.dragndrop.DragSourceManager;
+import com.github.achaaab.solitaire.presentation.dragndrop.DropTargetManager;
 import com.github.achaaab.solitaire.presentation.dragndrop.StackSourcePresentation;
+import com.github.achaaab.solitaire.presentation.dragndrop.StackTargetPresentation;
 
 import java.awt.Point;
 
-import static com.github.achaaab.solitaire.abstraction.Talon.CAPACITY;
+import static com.github.achaaab.solitaire.abstraction.Rank.COUNT;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.computeHeight;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.computeWidth;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.getTheme;
@@ -19,18 +20,34 @@ import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.getTh
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public class TalonFaceUpStackPresentation extends StackPresentation implements StackSourcePresentation {
+public class FoundationPresentation extends StackPresentation
+		implements StackSourcePresentation, StackTargetPresentation {
 
+	private final DropTargetManager dropTargetManager;
 	private final DragSourceManager dragSourceManager;
 
 	/**
 	 * @param control
+	 * @since 0.0.0
 	 */
-	public TalonFaceUpStackPresentation(TalonFaceUpStackControl control) {
+	public FoundationPresentation(FoundationControl control) {
 
-		super(control, CAPACITY, computeWidth(0.01), computeHeight(0.003));
+		super(control, COUNT, computeWidth(0.01), computeHeight(0.003));
 
+		setDefaultBorder();
+
+		dropTargetManager = new DropTargetManager(control, this);
 		dragSourceManager = new DragSourceManager(control, this);
+	}
+
+	@Override
+	public void acceptDrop() {
+		dropTargetManager.acceptDrop();
+	}
+
+	@Override
+	public void rejectDrop() {
+		dropTargetManager.rejectDrop();
 	}
 
 	@Override

@@ -1,10 +1,9 @@
-package com.github.achaaab.solitaire.control.pile;
+package com.github.achaaab.solitaire.control;
 
 import com.github.achaaab.solitaire.abstraction.Card;
-import com.github.achaaab.solitaire.abstraction.FaceDownStack;
-import com.github.achaaab.solitaire.control.CardControl;
+import com.github.achaaab.solitaire.abstraction.Stock;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
-import com.github.achaaab.solitaire.presentation.pile.PileFaceDownStackPresentation;
+import com.github.achaaab.solitaire.presentation.StockPresentation;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
@@ -12,15 +11,15 @@ import static javax.swing.SwingUtilities.invokeLater;
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public class PileFaceDownStackControl extends FaceDownStack {
+public class StockControl extends Stock {
 
-	private final PileFaceDownStackPresentation presentation;
+	private final StockPresentation presentation;
 
 	/**
 	 * @since 0.0.0
 	 */
-	public PileFaceDownStackControl() {
-		presentation = PresentationFactory.INSTANCE.newPileFaceDownStack(this);
+	public StockControl() {
+		presentation = PresentationFactory.INSTANCE.newStock(this);
 	}
 
 	@Override
@@ -41,9 +40,10 @@ public class PileFaceDownStackControl extends FaceDownStack {
 	}
 
 	/**
-	 * @return
+	 * @return presentation of this stock
+	 * @since 0.0.0
 	 */
-	public PileFaceDownStackPresentation getPresentation() {
+	public StockPresentation presentation() {
 		return presentation;
 	}
 }

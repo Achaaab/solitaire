@@ -32,7 +32,7 @@ public class CardControl extends Card {
 
 		super.setFaceUp(faceUp);
 
-		invokeLater(() -> presentation.setFaceVisible(isFaceUp()));
+		invokeLater(() -> presentation.setFaceUp(isFaceUp()));
 	}
 
 	/**

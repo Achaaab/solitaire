@@ -21,16 +21,19 @@ public class Solitaire {
 	protected final Stack deck;
 	protected final List<Foundation> foundations;
 	protected final List<Pile> piles;
-	protected final Talon talon;
+	protected final Stock stock;
+	protected final Waste waste;
 
 	/**
 	 * @param factory
+	 * @since 0.0.0
 	 */
 	public Solitaire(Factory factory) {
 
 		deck = factory.newDeck();
 
-		talon = factory.newTalon();
+		stock = factory.newStock();
+		waste = factory.newWaste();
 
 		foundations = generate(factory::newFoundation).
 				limit(Suit.values().length).
@@ -46,10 +49,8 @@ public class Solitaire {
 	 */
 	public void reset() {
 
-		transfer(talon.faceUpStack, deck);
-
-		delay();
-		deck.push(talon.faceDownStack);
+		transfer(waste, deck);
+		transfer(stock, deck);
 
 		for (var foundation : foundations) {
 			transfer(foundation, deck);
@@ -78,7 +79,7 @@ public class Solitaire {
 		}
 
 		delay();
-		talon.faceDownStack.push(deck);
+		stock.push(deck);
 	}
 
 	/**
@@ -97,9 +98,18 @@ public class Solitaire {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
-	public Talon talon() {
-		return talon;
+	public Stock stock() {
+		return stock;
+	}
+
+	/**
+	 * @return
+	 * @since 0.0.0
+	 */
+	public Waste waste() {
+		return waste;
 	}
 
 	/**
@@ -153,5 +163,35 @@ public class Solitaire {
 					findFirst().
 					ifPresent(foundation -> foundation.push(stack.pop()));
 		}
+	}
+
+	/**
+	 * @return
+	 * @since 0.0.0
+	 */
+	public boolean canDeal() {
+		return !stock.isEmpty();
+	}
+
+	/**
+	 * @since 0.0.0
+	 */
+	public void deal() {
+		waste.push(stock.pop());
+	}
+
+	/**
+	 * @return
+	 * @since 0.0.0
+	 */
+	public boolean canRecycle() {
+		return !waste.isEmpty() && stock.isEmpty();
+	}
+
+	/**
+	 * @since 0.0.0
+	 */
+	public void recycle() {
+		stock.push(waste);
 	}
 }

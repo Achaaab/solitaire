@@ -26,6 +26,7 @@ public enum Rank {
 
 	/**
 	 * @param string
+	 * @since 0.0.0
 	 */
 	Rank(String string) {
 		this.string = string;

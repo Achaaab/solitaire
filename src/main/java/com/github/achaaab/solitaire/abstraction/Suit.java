@@ -21,6 +21,7 @@ public enum Suit {
 	 * @param red
 	 * @param letter
 	 * @param symbol
+	 * @since 0.0.0
 	 */
 	Suit(boolean red, char letter, char symbol) {
 
@@ -31,6 +32,7 @@ public enum Suit {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public boolean isRed() {
 		return red;
@@ -38,6 +40,7 @@ public enum Suit {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public char getLetter() {
 		return letter;
@@ -45,6 +48,7 @@ public enum Suit {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public char getSymbol() {
 		return symbol;

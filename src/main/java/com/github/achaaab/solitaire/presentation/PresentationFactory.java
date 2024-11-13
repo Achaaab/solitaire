@@ -1,23 +1,18 @@
 package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.CardControl;
-import com.github.achaaab.solitaire.control.foundation.FoundationControl;
+import com.github.achaaab.solitaire.control.SolitaireControl;
+import com.github.achaaab.solitaire.control.StockControl;
+import com.github.achaaab.solitaire.control.TransferableStackControl;
+import com.github.achaaab.solitaire.control.WasteControl;
+import com.github.achaaab.solitaire.control.FoundationControl;
 import com.github.achaaab.solitaire.control.pile.PileControl;
 import com.github.achaaab.solitaire.control.pile.PileFaceDownStackControl;
 import com.github.achaaab.solitaire.control.pile.PileFaceUpStackControl;
-import com.github.achaaab.solitaire.control.SolitaireControl;
-import com.github.achaaab.solitaire.control.talon.TalonControl;
-import com.github.achaaab.solitaire.control.talon.TalonFaceDownStackControl;
-import com.github.achaaab.solitaire.control.talon.TalonFaceUpStackControl;
-import com.github.achaaab.solitaire.control.TransferableStackControl;
 import com.github.achaaab.solitaire.presentation.dragndrop.TransferableStackPresentation;
-import com.github.achaaab.solitaire.presentation.foundation.FoundationPresentation;
 import com.github.achaaab.solitaire.presentation.pile.PileFaceDownStackPresentation;
 import com.github.achaaab.solitaire.presentation.pile.PileFaceUpStackPresentation;
 import com.github.achaaab.solitaire.presentation.pile.PilePresentation;
-import com.github.achaaab.solitaire.presentation.talon.TalonFaceDownStackPresentation;
-import com.github.achaaab.solitaire.presentation.talon.TalonFaceUpStackPresentation;
-import com.github.achaaab.solitaire.presentation.talon.TalonPresentation;
 
 /**
  * @author Jonathan Guéhenneux
@@ -28,7 +23,10 @@ public class PresentationFactory {
 	public static final PresentationFactory INSTANCE = new PresentationFactory();
 
 	/**
-	 * le constructeur prive,juste pour empecher l'instanciation
+	 * Private constructor to force singleton usage.
+	 *
+	 * @see #INSTANCE
+	 * @since 0.0.0
 	 */
 	private PresentationFactory() {
 
@@ -37,29 +35,19 @@ public class PresentationFactory {
 	/**
 	 * @param control
 	 * @return
+	 * @since 0.0.0
 	 */
-	public TalonPresentation newTalon(TalonControl control) {
-
-		return new TalonPresentation(
-				control.faceDownStack().getPresentation(),
-				control.faceUpStack().presentation(),
-				control);
+	public StockPresentation newStock(StockControl control) {
+		return new StockPresentation(control);
 	}
 
 	/**
 	 * @param control
 	 * @return
+	 * @since 0.0.0
 	 */
-	public TalonFaceDownStackPresentation newTalonFaceDownStack(TalonFaceDownStackControl control) {
-		return new TalonFaceDownStackPresentation(control);
-	}
-
-	/**
-	 * @param control
-	 * @return
-	 */
-	public TalonFaceUpStackPresentation newTalonFaceUpStack(TalonFaceUpStackControl control) {
-		return new TalonFaceUpStackPresentation(control);
+	public WastePresentation newWaste(WasteControl control) {
+		return new WastePresentation(control);
 	}
 
 	/**
@@ -78,7 +66,7 @@ public class PresentationFactory {
 	 * @param control
 	 * @return
 	 */
-	public PileFaceDownStackPresentation newPileHiddenStack(PileFaceDownStackControl control) {
+	public PileFaceDownStackPresentation newPileFaceDownStack(PileFaceDownStackControl control) {
 		return new PileFaceDownStackPresentation(control);
 	}
 
@@ -86,7 +74,7 @@ public class PresentationFactory {
 	 * @param control
 	 * @return
 	 */
-	public PileFaceUpStackPresentation newPileVisibleStack(PileFaceUpStackControl control) {
+	public PileFaceUpStackPresentation newPileFaceUpStack(PileFaceUpStackControl control) {
 		return new PileFaceUpStackPresentation(control);
 	}
 

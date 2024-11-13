@@ -79,9 +79,18 @@ public class Factory {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
-	public Talon newTalon() {
-		return new Talon(newFaceDownStack(), newFaceUpStack());
+	public Stock newStock() {
+		return new Stock();
+	}
+
+	/**
+	 * @return
+	 * @since 0.0.0
+	 */
+	public Waste newWaste() {
+		return new Waste();
 	}
 
 	/**

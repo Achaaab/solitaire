@@ -1,13 +1,14 @@
 package com.github.achaaab.solitaire.control;
 
 import com.github.achaaab.solitaire.abstraction.Solitaire;
-import com.github.achaaab.solitaire.abstraction.Stack;
-import com.github.achaaab.solitaire.control.foundation.FoundationControl;
-import com.github.achaaab.solitaire.control.message.MessageControl;
 import com.github.achaaab.solitaire.control.pile.PileControl;
 import com.github.achaaab.solitaire.control.pile.PileFaceUpStackControl;
-import com.github.achaaab.solitaire.control.talon.TalonControl;
 import com.github.achaaab.solitaire.presentation.SolitairePresentation;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import static java.awt.event.MouseEvent.BUTTON1;
 
 /**
  * @author Jonathan Guéhenneux
@@ -28,8 +29,6 @@ public class SolitaireControl extends Solitaire {
 		message = ControlFactory.INSTANCE.newMessage();
 		presentation = new SolitairePresentation(this);
 
-		talon().setSolitaire(this);
-
 		for (var pile : piles) {
 
 			((PileControl) pile).faceUpStack().setMessage(message);
@@ -39,20 +38,50 @@ public class SolitaireControl extends Solitaire {
 		for (var foundation : foundations()) {
 			((FoundationControl) foundation).setMessage(message);
 		}
+
+		stock().presentation().addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent event) {
+
+				var button = event.getButton();
+
+				if (button == BUTTON1) {
+
+					if (canDeal()) {
+						deal();
+					} else if (canRecycle()) {
+						recycle();
+					}
+				}
+			}
+		});
+
+		waste().presentation().addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent event) {
+
+				var button = event.getButton();
+				var clickCount = event.getClickCount();
+
+				if (button == BUTTON1 && clickCount == 2) {
+					moveToFoundation(waste);
+				}
+			}
+		});
 	}
 
-	@Override
-	public void moveToFoundation(Stack stack) {
+	/**
+	 * @param pile
+	 * @since 0.0.0
+	 */
+	public void moveToFoundation(PileFaceUpStackControl pile) {
 
-		super.moveToFoundation(stack);
+		super.moveToFoundation(pile);
 
-		if (stack instanceof PileFaceUpStackControl pileFaceUpStackControl) {
-
-			var pile = pileFaceUpStackControl.getPile();
-
-			if (pile.canFlip()) {
-				pile.flip();
-			}
+		if (pile.getPile().canFlip()) {
+			pile.getPile().flip();
 		}
 	}
 
@@ -65,8 +94,13 @@ public class SolitaireControl extends Solitaire {
 	}
 
 	@Override
-	public TalonControl talon() {
-		return (TalonControl) talon;
+	public StockControl stock() {
+		return (StockControl) stock;
+	}
+
+	@Override
+	public WasteControl waste() {
+		return (WasteControl) waste;
 	}
 
 	/**

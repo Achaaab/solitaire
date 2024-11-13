@@ -7,7 +7,7 @@ import com.github.achaaab.solitaire.control.ControlFactory;
 import com.github.achaaab.solitaire.control.TransferableStackControl;
 import com.github.achaaab.solitaire.control.dragndrop.StackSourceControl;
 import com.github.achaaab.solitaire.control.dragndrop.StackTargetControl;
-import com.github.achaaab.solitaire.control.message.MessageControl;
+import com.github.achaaab.solitaire.control.MessageControl;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 import com.github.achaaab.solitaire.presentation.pile.PileFaceUpStackPresentation;
 
@@ -31,7 +31,7 @@ public class PileFaceUpStackControl extends AlternateStack implements StackSourc
 	 * @since 0.0.0
 	 */
 	public PileFaceUpStackControl() {
-		presentation = PresentationFactory.INSTANCE.newPileVisibleStack(this);
+		presentation = PresentationFactory.INSTANCE.newPileFaceUpStack(this);
 	}
 
 	/**

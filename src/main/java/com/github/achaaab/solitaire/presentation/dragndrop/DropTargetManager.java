@@ -25,12 +25,11 @@ public class DropTargetManager extends DropTargetAdapter {
 	private DropTargetDropEvent incomingEvent;
 
 	/**
-	 * @param targetControl controle du composant cible d'un drag n drop
-	 * @param targetContainer container graphique associe
+	 * @param targetControl
+	 * @param targetContainer
+	 * @since 0.0.0
 	 */
-	public DropTargetManager(
-			StackTargetControl targetControl,
-			JComponent targetContainer) {
+	public DropTargetManager(StackTargetControl targetControl, JComponent targetContainer) {
 
 		this.targetControl = targetControl;
 
@@ -74,14 +73,14 @@ public class DropTargetManager extends DropTargetAdapter {
 	}
 
 	/**
-	 *
+	 * @since 0.0.0
 	 */
 	public void acceptDrop() {
 		incomingEvent.getDropTargetContext().dropComplete(true);
 	}
 
 	/**
-	 *
+	 * @since 0.0.0
 	 */
 	public void rejectDrop() {
 		incomingEvent.rejectDrop();

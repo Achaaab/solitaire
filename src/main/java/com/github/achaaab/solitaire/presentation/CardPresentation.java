@@ -50,22 +50,22 @@ public class CardPresentation extends JComponent {
 		backImageLabel.setLocation(0, 0);
 		backImageLabel.setSize(width, height);
 
-		setFaceVisible(control.isFaceUp());
+		setFaceUp(control.isFaceUp());
 	}
 
 	/**
-	 * changer la visibilité de la carte
-	 *
-	 * @param faceVisible vrai si la face est visible, faux sinon
+	 * @param faceUp whether the card is turned face up
+	 * @since 0.0.0
 	 */
-	public void setFaceVisible(boolean faceVisible) {
+	public void setFaceUp(boolean faceUp) {
 
-		frontImageLabel.setVisible(faceVisible);
-		backImageLabel.setVisible(!faceVisible);
+		frontImageLabel.setVisible(faceUp);
+		backImageLabel.setVisible(!faceUp);
 	}
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public CardControl getControl() {
 		return control;

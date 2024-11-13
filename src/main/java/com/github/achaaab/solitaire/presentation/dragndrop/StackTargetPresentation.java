@@ -7,14 +7,12 @@ package com.github.achaaab.solitaire.presentation.dragndrop;
 public interface StackTargetPresentation {
 
 	/**
-	 * methode appelee par le controle pour signifier que le drop est accepte sur ce
-	 * composant.
+	 * @since 0.0.0
 	 */
 	void acceptDrop();
 
 	/**
-	 * methode appelee par le controle pour signifier que le drop est refuse par ce
-	 * composant.
+	 * @since 0.0.0
 	 */
 	void rejectDrop();
 }

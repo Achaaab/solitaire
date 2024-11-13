@@ -10,8 +10,8 @@ import com.github.achaaab.solitaire.control.TransferableStackControl;
 public interface StackSourceControl {
 
 	/**
-	 * methode appelee lors de la detection d'un drag n drop
-	 * @param card carte selectionne pour le drag and drop
+	 * @param card
+	 * @since 0.0.0
 	 */
 	void dragOut(CardControl card);
 
@@ -24,8 +24,8 @@ public interface StackSourceControl {
 	}
 
 	/**
-	 * methode appelee a la fin d'un drag n drop
-	 * @param stack tas de carte du drag and drop
+	 * @param stack
+	 * @since 0.0.0
 	 */
 	void dropFailed(TransferableStackControl stack);
 }

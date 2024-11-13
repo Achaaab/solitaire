@@ -21,6 +21,7 @@ public class PileControl extends Pile {
 	/**
 	 * @param faceDownStack
 	 * @param faceUpStack
+	 * @since 0.0.0
 	 */
 	public PileControl(PileFaceDownStackControl faceDownStack, PileFaceUpStackControl faceUpStack) {
 
@@ -53,6 +54,7 @@ public class PileControl extends Pile {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public PileFaceDownStackControl faceDownStack() {
 		return (PileFaceDownStackControl) faceDownStack;
@@ -60,6 +62,7 @@ public class PileControl extends Pile {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public PileFaceUpStackControl faceUpStack() {
 		return (PileFaceUpStackControl) faceUpStack;
@@ -67,6 +70,7 @@ public class PileControl extends Pile {
 
 	/**
 	 * @return
+	 * @since 0.0.0
 	 */
 	public PilePresentation getPresentation() {
 		return presentation;

@@ -1,7 +1,7 @@
-package com.github.achaaab.solitaire.control.message;
+package com.github.achaaab.solitaire.control;
 
 import com.github.achaaab.solitaire.presentation.audio.SoundEffect;
-import com.github.achaaab.solitaire.presentation.message.MessagePresentation;
+import com.github.achaaab.solitaire.presentation.MessagePresentation;
 
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.getTheme;
 

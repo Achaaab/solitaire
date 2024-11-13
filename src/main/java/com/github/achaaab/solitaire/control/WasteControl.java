@@ -1,13 +1,10 @@
-package com.github.achaaab.solitaire.control.talon;
+package com.github.achaaab.solitaire.control;
 
 import com.github.achaaab.solitaire.abstraction.Card;
-import com.github.achaaab.solitaire.abstraction.FaceUpStack;
-import com.github.achaaab.solitaire.control.CardControl;
-import com.github.achaaab.solitaire.control.ControlFactory;
-import com.github.achaaab.solitaire.control.TransferableStackControl;
+import com.github.achaaab.solitaire.abstraction.Waste;
 import com.github.achaaab.solitaire.control.dragndrop.StackSourceControl;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
-import com.github.achaaab.solitaire.presentation.talon.TalonFaceUpStackPresentation;
+import com.github.achaaab.solitaire.presentation.WastePresentation;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
@@ -15,15 +12,15 @@ import static javax.swing.SwingUtilities.invokeLater;
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public class TalonFaceUpStackControl extends FaceUpStack implements StackSourceControl {
+public class WasteControl extends Waste implements StackSourceControl {
 
-	private final TalonFaceUpStackPresentation presentation;
+	private final WastePresentation presentation;
 
 	/**
 	 * @since 0.0.0
 	 */
-	public TalonFaceUpStackControl() {
-		presentation = PresentationFactory.INSTANCE.newTalonFaceUpStack(this);
+	public WasteControl() {
+		presentation = PresentationFactory.INSTANCE.newWaste(this);
 	}
 
 	@Override
@@ -43,7 +40,6 @@ public class TalonFaceUpStackControl extends FaceUpStack implements StackSourceC
 		return card;
 	}
 
-
 	@Override
 	public void dropFailed(TransferableStackControl stack) {
 		push(stack);
@@ -62,10 +58,10 @@ public class TalonFaceUpStackControl extends FaceUpStack implements StackSourceC
 	}
 
 	/**
-	 * @return
+	 * @return presentation of this waste
 	 * @since 0.0.0
 	 */
-	public TalonFaceUpStackPresentation presentation() {
+	public WastePresentation presentation() {
 		return presentation;
 	}
 }

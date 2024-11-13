@@ -10,11 +10,13 @@ public interface StackTargetControl {
 
 	/**
 	 * @param stack
+	 * @since 0.0.0
 	 */
 	void dragIn(TransferableStackControl stack);
 
 	/**
 	 * @param stack
+	 * @since 0.0.0
 	 */
 	void drop(TransferableStackControl stack);
 }

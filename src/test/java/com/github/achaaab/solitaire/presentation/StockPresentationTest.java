@@ -1,9 +1,10 @@
 package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.ControlFactory;
+import com.github.achaaab.solitaire.control.StockControl;
 import com.github.achaaab.solitaire.presentation.theme.ByronKnollTheme;
 
-import static com.github.achaaab.solitaire.abstraction.Talon.CAPACITY;
+import static com.github.achaaab.solitaire.abstraction.Stock.CAPACITY;
 import static com.github.achaaab.solitaire.presentation.PresentationTestUtility.show;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.setTheme;
 import static java.lang.Thread.currentThread;
@@ -14,7 +15,7 @@ import static java.util.Collections.shuffle;
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public class TalonHiddenStackPresentationTest {
+public class StockPresentationTest {
 
 	/**
 	 * @param arguments none
@@ -26,9 +27,9 @@ public class TalonHiddenStackPresentationTest {
 
 		var deck = ControlFactory.INSTANCE.newDeck();
 		shuffle(deck);
-		var stack = ControlFactory.INSTANCE.newTalonFaceDownStack();
+		var stock = ControlFactory.INSTANCE.newStock();
 
-		show(stack.getPresentation(), "talon hidden stack presentation test");
+		show(((StockControl) stock).presentation(), "Stock presentation test");
 
 		deck.stream().limit(CAPACITY).forEach(card -> {
 
@@ -38,7 +39,7 @@ public class TalonHiddenStackPresentationTest {
 				currentThread().interrupt();
 			}
 
-			stack.push(card);
+			stock.push(card);
 		});
 	}
 }

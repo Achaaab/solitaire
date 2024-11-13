@@ -1,7 +1,7 @@
 package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.SolitaireControl;
-import com.github.achaaab.solitaire.control.foundation.FoundationControl;
+import com.github.achaaab.solitaire.control.FoundationControl;
 import com.github.achaaab.solitaire.control.pile.PileControl;
 
 import javax.swing.BoxLayout;
@@ -28,6 +28,7 @@ public class SolitairePresentation extends JPanel {
 
 	/**
 	 * @param control
+	 * @since 0.0.0
 	 */
 	public SolitairePresentation(SolitaireControl control) {
 
@@ -64,7 +65,9 @@ public class SolitairePresentation extends JPanel {
 			foundationsPanel.add(((FoundationControl) foundation).presentation());
 		}
 
-		northPanel.add(control.talon().presentation());
+		northPanel.add(control.stock().presentation());
+		northPanel.add(createRigidArea(new Dimension(stackGap, 0)));
+		northPanel.add(control.waste().presentation());
 		northPanel.add(createGlue());
 		northPanel.add(foundationsPanel);
 
