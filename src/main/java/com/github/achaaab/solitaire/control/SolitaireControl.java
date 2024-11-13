@@ -55,7 +55,7 @@ public class SolitaireControl extends Solitaire {
 		stock().presentation().addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseClicked(MouseEvent event) {
+			public void mousePressed(MouseEvent event) {
 
 				var button = event.getButton();
 
