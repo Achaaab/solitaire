@@ -2,9 +2,11 @@ package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.SolitaireControl;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
@@ -51,6 +53,10 @@ public class SolitaireMenu extends JMenuBar {
 		setFontSize(help, FONT_SIZE);
 		help.setBorder(MENU_BORDER);
 
+		var rules = new JMenu("Règles");
+		setFontSize(rules, FONT_SIZE);
+		rules.setBorder(MENU_BORDER);
+
 		newGame = new JMenuItem("Nouvelle partie");
 		setFontSize(newGame, FONT_SIZE);
 		newGame.setBorder(MENU_BORDER);
@@ -61,6 +67,31 @@ public class SolitaireMenu extends JMenuBar {
 		exit.setBorder(MENU_BORDER);
 		exit.addActionListener(this::fermerFenetre);
 
+		var turnedCardCount = solitaire.rules().getTurnedCardCount();
+
+		var turn1Card = new JRadioButtonMenuItem("Tirer 1 carte");
+		setFontSize(turn1Card, FONT_SIZE);
+		turn1Card.setBorder(MENU_BORDER);
+		turn1Card.setSelected(turnedCardCount == 1);
+		turn1Card.addActionListener(event -> solitaire.rules().setTurnedCardCount(1));
+
+		var turn2Cards = new JRadioButtonMenuItem("Tirer 2 cartes");
+		setFontSize(turn2Cards, FONT_SIZE);
+		turn2Cards.setBorder(MENU_BORDER);
+		turn2Cards.setSelected(turnedCardCount == 2);
+		turn2Cards.addActionListener(event -> solitaire.rules().setTurnedCardCount(2));
+
+		var turn3Cards = new JRadioButtonMenuItem("Tirer 3 cartes");
+		setFontSize(turn3Cards, FONT_SIZE);
+		turn3Cards.setBorder(MENU_BORDER);
+		turn3Cards.setSelected(turnedCardCount == 3);
+		turn3Cards.addActionListener(event -> solitaire.rules().setTurnedCardCount(3));
+
+		var drawNCardsGroup = new ButtonGroup();
+		drawNCardsGroup.add(turn1Card);
+		drawNCardsGroup.add(turn2Cards);
+		drawNCardsGroup.add(turn3Cards);
+
 		var about = new JMenuItem("À propos");
 		setFontSize(about, FONT_SIZE);
 		about.setBorder(MENU_BORDER);
@@ -68,9 +99,13 @@ public class SolitaireMenu extends JMenuBar {
 
 		file.add(newGame);
 		file.add(exit);
+		rules.add(turn1Card);
+		rules.add(turn2Cards);
+		rules.add(turn3Cards);
 		help.add(about);
 
 		add(file);
+		add(rules);
 		add(help);
 	}
 

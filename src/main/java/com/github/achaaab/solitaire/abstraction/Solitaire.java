@@ -3,6 +3,7 @@ package com.github.achaaab.solitaire.abstraction;
 import java.time.Duration;
 import java.util.List;
 
+import static java.lang.Math.min;
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
 import static java.time.Duration.ofMillis;
@@ -18,11 +19,14 @@ public class Solitaire {
 	public static final int PILE_COUNT = 7;
 	private static final Duration DELAY = ofMillis(30);
 
+	protected final Rules rules;
 	protected final Stack deck;
-	protected final List<Foundation> foundations;
-	protected final List<Pile> piles;
 	protected final Stock stock;
 	protected final Waste waste;
+	protected final List<Foundation> foundations;
+	protected final List<Pile> piles;
+
+	private int turnedCardCount;
 
 	/**
 	 * @param factory
@@ -30,6 +34,7 @@ public class Solitaire {
 	 */
 	public Solitaire(Factory factory) {
 
+		rules = factory.newRules();
 		deck = factory.newDeck();
 
 		stock = factory.newStock();
@@ -48,6 +53,8 @@ public class Solitaire {
 	 * @since 0.0.0
 	 */
 	public void reset() {
+
+		turnedCardCount = rules.getTurnedCardCount();
 
 		transfer(waste, deck);
 		transfer(stock, deck);
@@ -77,36 +84,6 @@ public class Solitaire {
 
 		delay();
 		stock.push(deck);
-	}
-
-	/**
-	 * @return
-	 */
-	public List<Foundation> foundations() {
-		return foundations;
-	}
-
-	/**
-	 * @return
-	 */
-	public List<Pile> piles() {
-		return piles;
-	}
-
-	/**
-	 * @return
-	 * @since 0.0.0
-	 */
-	public Stock stock() {
-		return stock;
-	}
-
-	/**
-	 * @return
-	 * @since 0.0.0
-	 */
-	public Waste waste() {
-		return waste;
 	}
 
 	/**
@@ -171,10 +148,18 @@ public class Solitaire {
 	}
 
 	/**
+	 * Transfers cards from the stock to the waste, one by one, turning them face up.
+	 * The number of transferred cards depends on the rules.
+	 *
 	 * @since 0.0.0
 	 */
 	public void deal() {
-		waste.push(stock.pop());
+
+		var cardCount = min(stock.size(), turnedCardCount);
+
+		for (var cardIndex = 0; cardIndex < cardCount; cardIndex++) {
+			waste.push(stock.pop());
+		}
 	}
 
 	/**
@@ -190,5 +175,43 @@ public class Solitaire {
 	 */
 	public void recycle() {
 		stock.push(waste);
+	}
+
+	/**
+	 * @return rules
+	 * @since 0.0.0
+	 */
+	public Rules rules() {
+		return rules;
+	}
+
+	/**
+	 * @return
+	 * @since 0.0.0
+	 */
+	public Stock stock() {
+		return stock;
+	}
+
+	/**
+	 * @return
+	 * @since 0.0.0
+	 */
+	public Waste waste() {
+		return waste;
+	}
+
+	/**
+	 * @return
+	 */
+	public List<Foundation> foundations() {
+		return foundations;
+	}
+
+	/**
+	 * @return
+	 */
+	public List<Pile> piles() {
+		return piles;
 	}
 }

@@ -7,6 +7,14 @@ package com.github.achaaab.solitaire.abstraction;
 public class Factory {
 
 	/**
+	 * @return rules
+	 * @since 0.0.0
+	 */
+	public Rules newRules() {
+		return new Rules();
+	}
+
+	/**
 	 * Creates a new deck.
 	 *
 	 * @return created deck
