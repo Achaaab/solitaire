@@ -27,6 +27,8 @@ public class Solitaire {
 	protected final List<Pile> piles;
 
 	private int turnedCardCount;
+	private int maxRecycleCount;
+	private int recycleCount;
 
 	/**
 	 * @param factory
@@ -55,6 +57,8 @@ public class Solitaire {
 	public void reset() {
 
 		turnedCardCount = rules.getTurnedCardCount();
+		maxRecycleCount = rules().getRecycleCount();
+		recycleCount = 0;
 
 		transfer(waste, deck);
 		transfer(stock, deck);
@@ -167,14 +171,16 @@ public class Solitaire {
 	 * @since 0.0.0
 	 */
 	public boolean canRecycle() {
-		return !waste.isEmpty() && stock.isEmpty();
+		return recycleCount != maxRecycleCount && !waste.isEmpty() && stock.isEmpty();
 	}
 
 	/**
 	 * @since 0.0.0
 	 */
 	public void recycle() {
+
 		stock.push(waste);
+		recycleCount++;
 	}
 
 	/**

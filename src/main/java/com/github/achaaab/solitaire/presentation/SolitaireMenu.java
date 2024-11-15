@@ -68,6 +68,7 @@ public class SolitaireMenu extends JMenuBar {
 		exit.addActionListener(this::fermerFenetre);
 
 		var turnedCardCount = solitaire.rules().getTurnedCardCount();
+		var recycleCount = solitaire.rules().getRecycleCount();
 
 		var turn1Card = new JRadioButtonMenuItem("Tirer 1 carte");
 		setFontSize(turn1Card, FONT_SIZE);
@@ -92,6 +93,29 @@ public class SolitaireMenu extends JMenuBar {
 		drawNCardsGroup.add(turn2Cards);
 		drawNCardsGroup.add(turn3Cards);
 
+		var reycle1 = new JRadioButtonMenuItem("0 recyclage");
+		setFontSize(reycle1, FONT_SIZE);
+		reycle1.setBorder(MENU_BORDER);
+		reycle1.setSelected(recycleCount == 1);
+		reycle1.addActionListener(event -> solitaire.rules().setRecycleCount(1));
+
+		var reycle3 = new JRadioButtonMenuItem("2 recyclages");
+		setFontSize(reycle3, FONT_SIZE);
+		reycle3.setBorder(MENU_BORDER);
+		reycle3.setSelected(recycleCount == 3);
+		reycle3.addActionListener(event -> solitaire.rules().setRecycleCount(3));
+
+		var reycleUnlimited = new JRadioButtonMenuItem("∞ recyclages");
+		setFontSize(reycleUnlimited, FONT_SIZE);
+		reycleUnlimited.setBorder(MENU_BORDER);
+		reycleUnlimited.setSelected(recycleCount == -1);
+		reycleUnlimited.addActionListener(event -> solitaire.rules().setRecycleCount(-1));
+
+		var recycleGroup = new ButtonGroup();
+		recycleGroup.add(reycle1);
+		recycleGroup.add(reycle3);
+		recycleGroup.add(reycleUnlimited);
+
 		var about = new JMenuItem("À propos");
 		setFontSize(about, FONT_SIZE);
 		about.setBorder(MENU_BORDER);
@@ -102,6 +126,10 @@ public class SolitaireMenu extends JMenuBar {
 		rules.add(turn1Card);
 		rules.add(turn2Cards);
 		rules.add(turn3Cards);
+		rules.addSeparator();
+		rules.add(reycle1);
+		rules.add(reycle3);
+		rules.add(reycleUnlimited);
 		help.add(about);
 
 		add(file);
@@ -129,8 +157,11 @@ public class SolitaireMenu extends JMenuBar {
 
 		new Thread(() -> {
 
-			solitaire.reset();
-			newGame.setEnabled(true);
+			try {
+				solitaire.reset();
+			} finally {
+				newGame.setEnabled(true);
+			}
 
 		}).start();
 	}
