@@ -7,7 +7,7 @@ package com.github.achaaab.solitaire.abstraction;
 public class Rules {
 
 	private int turnedCardCount;
-	private int recycleCount;
+	private int passCount;
 
 	/**
 	 * @since 0.0.0
@@ -15,7 +15,7 @@ public class Rules {
 	public Rules() {
 
 		turnedCardCount = 1;
-		recycleCount = -1;
+		passCount = -1;
 	}
 
 	/**
@@ -38,15 +38,15 @@ public class Rules {
 	 * @return how many times the waste can be recycled, {@code -1} if there is no limit
 	 * @since 0.0.0
 	 */
-	public int getRecycleCount() {
-		return recycleCount;
+	public int getPassCount() {
+		return passCount;
 	}
 
 	/**
-	 * @param recycleCount how many times the waste can be recycled, {@code -1} if there is no limit
+	 * @param passCount how many times the waste can be recycled, {@code -1} if there is no limit
 	 * @since 0.0.0
 	 */
-	public void setRecycleCount(int recycleCount) {
-		this.recycleCount = recycleCount;
+	public void setPassCount(int passCount) {
+		this.passCount = passCount;
 	}
 }

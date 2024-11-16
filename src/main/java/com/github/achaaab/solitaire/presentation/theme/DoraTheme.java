@@ -25,7 +25,7 @@ public class DoraTheme extends AbstractTheme {
 
 	@Override
 	public ImageIcon getCardBackImage() {
-		return getImage("dos.png", cardWidth(), cardHeight());
+		return getImage("back.png", cardWidth(), cardHeight());
 	}
 
 	@Override

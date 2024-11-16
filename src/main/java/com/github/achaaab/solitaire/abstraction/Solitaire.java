@@ -27,8 +27,8 @@ public class Solitaire {
 	protected final List<Pile> piles;
 
 	private int turnedCardCount;
-	private int maxRecycleCount;
-	private int recycleCount;
+	private int maxPassCount;
+	private int passCount;
 
 	/**
 	 * @param factory
@@ -57,8 +57,8 @@ public class Solitaire {
 	public void reset() {
 
 		turnedCardCount = rules.getTurnedCardCount();
-		maxRecycleCount = rules().getRecycleCount();
-		recycleCount = 0;
+		maxPassCount = rules().getPassCount();
+		passCount = 1;
 
 		transfer(waste, deck);
 		transfer(stock, deck);
@@ -171,7 +171,7 @@ public class Solitaire {
 	 * @since 0.0.0
 	 */
 	public boolean canRecycle() {
-		return recycleCount != maxRecycleCount && !waste.isEmpty() && stock.isEmpty();
+		return passCount != maxPassCount && !waste.isEmpty() && stock.isEmpty();
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class Solitaire {
 	public void recycle() {
 
 		stock.push(waste);
-		recycleCount++;
+		passCount++;
 	}
 
 	/**

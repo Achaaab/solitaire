@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static java.awt.event.MouseEvent.BUTTON1;
+import static javax.swing.SwingUtilities.getWindowAncestor;
 
 /**
  * @author Jonathan Guéhenneux
@@ -83,7 +84,6 @@ public class SolitaireControl extends Solitaire {
 				}
 			}
 		});
-
 	}
 
 	/**
@@ -97,6 +97,24 @@ public class SolitaireControl extends Solitaire {
 		if (pile.canFlip()) {
 			pile.flip();
 		}
+	}
+
+	/**
+	 * Disables the whole window ancestor.
+	 *
+	 * @since 0.0.0
+	 */
+	public void disable() {
+		getWindowAncestor(presentation()).setEnabled(false);
+	}
+
+	/**
+	 * Enables the whole window ancestor.
+	 *
+	 * @since 0.0.0
+	 */
+	public void enable() {
+		getWindowAncestor(presentation()).setEnabled(true);
 	}
 
 	/**

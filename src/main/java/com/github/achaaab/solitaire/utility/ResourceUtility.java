@@ -2,8 +2,10 @@ package com.github.achaaab.solitaire.utility;
 
 import org.slf4j.Logger;
 
+import javax.imageio.ImageIO;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -11,6 +13,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 import static java.awt.Font.DIALOG;
 import static java.awt.Font.PLAIN;
@@ -34,6 +37,40 @@ public class ResourceUtility {
 
 	private static final ClassLoader CLASS_LOADER = ResourceUtility.class.getClassLoader();
 	private static final Font DEFAULT_FONT = new Font(DIALOG, PLAIN, 12);
+
+	/**
+	 * Loads an image resource.
+	 *
+	 * @param resourceName name of the image resource to open
+	 * @return loaded image resource
+	 * @since 0.0.0
+	 */
+	public static Optional<Image> loadOptionalImage(String resourceName) {
+
+		Optional<Image> image;
+
+		var url = CLASS_LOADER.getResource(resourceName);
+
+		if (url == null) {
+
+			image = Optional.empty();
+			LOGGER.info("image resource not found: {}", resourceName);
+
+		} else {
+
+			try {
+
+				image = Optional.of(ImageIO.read(url));
+
+			} catch (IOException ioException) {
+
+				image = Optional.empty();
+				LOGGER.warn(ioException.getMessage(), ioException);
+			}
+		}
+
+		return image;
+	}
 
 	/**
 	 * Opens an input stream on a named resource.

@@ -46,18 +46,21 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	@Override
 	public void dragOut(CardControl card) {
 
-		var cardIndex = indexOf(card);
-		var sourceLocation = card.getPresentation().getLocation();
+		if (card.isFaceUp()) {
 
-		draggedOutStack = ControlFactory.INSTANCE.newTransferableStack(cardIndex + 1);
-		var temporaryStack = ControlFactory.INSTANCE.newStack();
+			var cardIndex = indexOf(card);
+			var sourceLocation = card.getPresentation().getLocation();
 
-		while (temporaryStack.size() <= cardIndex) {
-			temporaryStack.push(pop());
+			draggedOutStack = ControlFactory.INSTANCE.newTransferableStack(cardIndex + 1);
+			var temporaryStack = ControlFactory.INSTANCE.newStack();
+
+			while (temporaryStack.size() <= cardIndex) {
+				temporaryStack.push(pop());
+			}
+
+			draggedOutStack.push(temporaryStack);
+			presentation.initiateDragAndDrop(sourceLocation, draggedOutStack);
 		}
-
-		draggedOutStack.push(temporaryStack);
-		presentation.initiateDragAndDrop(sourceLocation, draggedOutStack);
 	}
 
 	@Override

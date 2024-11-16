@@ -68,7 +68,7 @@ public class SolitaireMenu extends JMenuBar {
 		exit.addActionListener(this::fermerFenetre);
 
 		var turnedCardCount = solitaire.rules().getTurnedCardCount();
-		var recycleCount = solitaire.rules().getRecycleCount();
+		var recycleCount = solitaire.rules().getPassCount();
 
 		var turn1Card = new JRadioButtonMenuItem("Tirer 1 carte");
 		setFontSize(turn1Card, FONT_SIZE);
@@ -93,28 +93,28 @@ public class SolitaireMenu extends JMenuBar {
 		drawNCardsGroup.add(turn2Cards);
 		drawNCardsGroup.add(turn3Cards);
 
-		var reycle1 = new JRadioButtonMenuItem("0 recyclage");
-		setFontSize(reycle1, FONT_SIZE);
-		reycle1.setBorder(MENU_BORDER);
-		reycle1.setSelected(recycleCount == 1);
-		reycle1.addActionListener(event -> solitaire.rules().setRecycleCount(1));
+		var pass1 = new JRadioButtonMenuItem("1 passe");
+		setFontSize(pass1, FONT_SIZE);
+		pass1.setBorder(MENU_BORDER);
+		pass1.setSelected(recycleCount == 1);
+		pass1.addActionListener(event -> solitaire.rules().setPassCount(1));
 
-		var reycle3 = new JRadioButtonMenuItem("2 recyclages");
-		setFontSize(reycle3, FONT_SIZE);
-		reycle3.setBorder(MENU_BORDER);
-		reycle3.setSelected(recycleCount == 3);
-		reycle3.addActionListener(event -> solitaire.rules().setRecycleCount(3));
+		var pass3 = new JRadioButtonMenuItem("3 passes");
+		setFontSize(pass3, FONT_SIZE);
+		pass3.setBorder(MENU_BORDER);
+		pass3.setSelected(recycleCount == 3);
+		pass3.addActionListener(event -> solitaire.rules().setPassCount(3));
 
-		var reycleUnlimited = new JRadioButtonMenuItem("∞ recyclages");
-		setFontSize(reycleUnlimited, FONT_SIZE);
-		reycleUnlimited.setBorder(MENU_BORDER);
-		reycleUnlimited.setSelected(recycleCount == -1);
-		reycleUnlimited.addActionListener(event -> solitaire.rules().setRecycleCount(-1));
+		var passUnlimited = new JRadioButtonMenuItem("∞ passes");
+		setFontSize(passUnlimited, FONT_SIZE);
+		passUnlimited.setBorder(MENU_BORDER);
+		passUnlimited.setSelected(recycleCount == -1);
+		passUnlimited.addActionListener(event -> solitaire.rules().setPassCount(-1));
 
-		var recycleGroup = new ButtonGroup();
-		recycleGroup.add(reycle1);
-		recycleGroup.add(reycle3);
-		recycleGroup.add(reycleUnlimited);
+		var passGroup = new ButtonGroup();
+		passGroup.add(pass1);
+		passGroup.add(pass3);
+		passGroup.add(passUnlimited);
 
 		var about = new JMenuItem("À propos");
 		setFontSize(about, FONT_SIZE);
@@ -127,9 +127,9 @@ public class SolitaireMenu extends JMenuBar {
 		rules.add(turn2Cards);
 		rules.add(turn3Cards);
 		rules.addSeparator();
-		rules.add(reycle1);
-		rules.add(reycle3);
-		rules.add(reycleUnlimited);
+		rules.add(pass1);
+		rules.add(pass3);
+		rules.add(passUnlimited);
 		help.add(about);
 
 		add(file);
@@ -153,14 +153,14 @@ public class SolitaireMenu extends JMenuBar {
 	 */
 	private void reset(ActionEvent event) {
 
-		newGame.setEnabled(false);
+		solitaire.disable();
 
 		new Thread(() -> {
 
 			try {
 				solitaire.reset();
 			} finally {
-				newGame.setEnabled(true);
+				solitaire.enable();
 			}
 
 		}).start();

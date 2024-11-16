@@ -1,11 +1,13 @@
 package com.github.achaaab.solitaire.presentation;
 
 import com.github.achaaab.solitaire.control.SolitaireControl;
+import com.github.achaaab.solitaire.utility.ResourceUtility;
 
 import javax.swing.JFrame;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import static com.github.achaaab.solitaire.utility.ResourceUtility.loadOptionalImage;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
 import static javax.swing.SwingUtilities.invokeLater;
@@ -23,6 +25,8 @@ public class SolitaireWindow extends JFrame {
 	public SolitaireWindow(SolitaireControl solitaire) {
 
 		super("Solitaire");
+
+		loadOptionalImage("icons/icon_256.png").ifPresent(this::setIconImage);
 
 		addWindowListener(new SolitaireListener());
 
