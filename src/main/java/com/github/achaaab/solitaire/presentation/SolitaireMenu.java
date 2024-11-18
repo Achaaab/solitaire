@@ -10,10 +10,12 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.util.Map;
 
 import static com.github.achaaab.solitaire.presentation.SwingUtility.scale;
 import static com.github.achaaab.solitaire.presentation.SwingUtility.scaleFloat;
 import static com.github.achaaab.solitaire.presentation.SwingUtility.setFontSize;
+import static com.github.achaaab.solitaire.utility.ResourceUtility.getMessage;
 import static java.awt.event.WindowEvent.WINDOW_CLOSING;
 import static java.util.ResourceBundle.getBundle;
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -36,7 +38,7 @@ public class SolitaireMenu extends JMenuBar {
 	private static final Border MENU_BORDER = createEmptyBorder(scale(5), scale(10), scale(5), scale(10));
 
 	private final SolitaireControl solitaire;
-	private final JMenuItem newGame;
+	private final String aboutMessage;
 
 	/**
 	 * @param solitaire
@@ -45,7 +47,9 @@ public class SolitaireMenu extends JMenuBar {
 	public SolitaireMenu(SolitaireControl solitaire) {
 
 		this.solitaire = solitaire;
+
 		var bundle = getBundle("messages/menu");
+		aboutMessage = getMessage("messages/about.html", Map.of("font-size", scale(16)));
 
 		var file = new JMenu(bundle.getString("file"));
 		setFontSize(file, FONT_SIZE);
@@ -59,7 +63,7 @@ public class SolitaireMenu extends JMenuBar {
 		setFontSize(rules, FONT_SIZE);
 		rules.setBorder(MENU_BORDER);
 
-		newGame = new JMenuItem(bundle.getString("new_game"));
+		var newGame = new JMenuItem(bundle.getString("new_game"));
 		setFontSize(newGame, FONT_SIZE);
 		newGame.setBorder(MENU_BORDER);
 		newGame.addActionListener(this::reset);
@@ -173,19 +177,6 @@ public class SolitaireMenu extends JMenuBar {
 	 * @since 0.0.0
 	 */
 	private void about(ActionEvent event) {
-
-		solitaire.message().display("""
-				<html>
-					<body>
-						<h1 style="text-align:center">Solitaire</h1>
-						<p style="text-align:center">version 0.0.0</p>
-						<br>
-						<p style="text-align:center">Jonathan Guéhenneux</p>
-						<p style="text-align:center">
-							<a href="https://github.com/Achaaab">https://github.com/Achaaab</a>
-						</p>
-					</body>
-				</html>
-				""");
+		solitaire.message().display(aboutMessage);
 	}
 }
