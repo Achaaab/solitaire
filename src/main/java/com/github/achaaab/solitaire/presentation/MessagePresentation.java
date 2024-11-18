@@ -63,7 +63,6 @@ public class MessagePresentation extends JPanel {
 		textArea.setEditable(false);
 		textArea.setFocusable(false);
 		textArea.setForeground(TEXT_COLOR);
-		textArea.setFont(textArea.getFont().deriveFont(FONT_SIZE));
 		textArea.setOpaque(false);
 		textArea.addHyperlinkListener(this::hyperlinkUpdate);
 

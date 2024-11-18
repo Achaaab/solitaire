@@ -2,9 +2,13 @@ package com.github.achaaab.solitaire.control;
 
 import com.github.achaaab.solitaire.abstraction.Card;
 import com.github.achaaab.solitaire.abstraction.Pile;
-import com.github.achaaab.solitaire.presentation.PresentationFactory;
 import com.github.achaaab.solitaire.presentation.PilePresentation;
+import com.github.achaaab.solitaire.presentation.PresentationFactory;
 
+import java.util.Map;
+
+import static com.github.achaaab.solitaire.presentation.SwingUtility.scale;
+import static com.github.achaaab.solitaire.utility.ResourceUtility.getMessage;
 import static javax.swing.SwingUtilities.invokeLater;
 
 /**
@@ -16,6 +20,7 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	private static int missedDropCount = 0;
 
 	private final PilePresentation presentation;
+	private final String missedDropMessage;
 	private MessageControl message;
 	private TransferableStackControl draggedOutStack;
 
@@ -23,7 +28,9 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	 * @since 0.0.0
 	 */
 	public PileControl() {
+
 		presentation = PresentationFactory.INSTANCE.newPile(this);
+		missedDropMessage = getMessage("messages/pile.html", Map.of("font-size", scale(16)));
 	}
 
 	@Override
@@ -89,27 +96,7 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 
 			if (++missedDropCount == 3) {
 
-				message.display("""
-						<html>
-							<body>
-								<ul>
-									<li>Dans ce tas, les couleurs doivent être alternées
-									(<span style="color:#FF0000">Rouge</span> /
-									<span style="color:#000000">Noire</span>).</li>
-						
-									<li>De plus la valeur de la carte posée doit être juste inférieure
-									à la précédente.</li>
-						
-									<li>Par exemple : <span style="color:#000000">🂭</span>
-									sur <span style="color:#FF0000">🂾</span> ou <span style="color:#FF0000">🃊</span>
-									sur <span style="color:#000000">🂫</span>.</li>
-						
-									<li>Dans un tas vide, vous ne pouvez poser qu'un Roi.</li>
-								</ul>
-							</body>
-						</html>
-						""");
-
+				message.display(missedDropMessage);
 				missedDropCount = 0;
 			}
 		}

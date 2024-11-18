@@ -15,6 +15,7 @@ import static com.github.achaaab.solitaire.presentation.SwingUtility.scale;
 import static com.github.achaaab.solitaire.presentation.SwingUtility.scaleFloat;
 import static com.github.achaaab.solitaire.presentation.SwingUtility.setFontSize;
 import static java.awt.event.WindowEvent.WINDOW_CLOSING;
+import static java.util.ResourceBundle.getBundle;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.SwingUtilities.getWindowAncestor;
 
@@ -44,25 +45,26 @@ public class SolitaireMenu extends JMenuBar {
 	public SolitaireMenu(SolitaireControl solitaire) {
 
 		this.solitaire = solitaire;
+		var bundle = getBundle("messages/menu");
 
-		var file = new JMenu("Fichier");
+		var file = new JMenu(bundle.getString("file"));
 		setFontSize(file, FONT_SIZE);
 		file.setBorder(MENU_BORDER);
 
-		var help = new JMenu("Aide");
+		var help = new JMenu(bundle.getString("help"));
 		setFontSize(help, FONT_SIZE);
 		help.setBorder(MENU_BORDER);
 
-		var rules = new JMenu("Règles");
+		var rules = new JMenu(bundle.getString("rules"));
 		setFontSize(rules, FONT_SIZE);
 		rules.setBorder(MENU_BORDER);
 
-		newGame = new JMenuItem("Nouvelle partie");
+		newGame = new JMenuItem(bundle.getString("new_game"));
 		setFontSize(newGame, FONT_SIZE);
 		newGame.setBorder(MENU_BORDER);
 		newGame.addActionListener(this::reset);
 
-		var exit = new JMenuItem("Quitter");
+		var exit = new JMenuItem(bundle.getString("quit"));
 		setFontSize(exit, FONT_SIZE);
 		exit.setBorder(MENU_BORDER);
 		exit.addActionListener(this::fermerFenetre);
@@ -70,19 +72,19 @@ public class SolitaireMenu extends JMenuBar {
 		var turnedCardCount = solitaire.rules().getTurnedCardCount();
 		var recycleCount = solitaire.rules().getPassCount();
 
-		var turn1Card = new JRadioButtonMenuItem("Tirer 1 carte");
+		var turn1Card = new JRadioButtonMenuItem(bundle.getString("draw_1"));
 		setFontSize(turn1Card, FONT_SIZE);
 		turn1Card.setBorder(MENU_BORDER);
 		turn1Card.setSelected(turnedCardCount == 1);
 		turn1Card.addActionListener(event -> solitaire.rules().setTurnedCardCount(1));
 
-		var turn2Cards = new JRadioButtonMenuItem("Tirer 2 cartes");
+		var turn2Cards = new JRadioButtonMenuItem(bundle.getString("draw_2"));
 		setFontSize(turn2Cards, FONT_SIZE);
 		turn2Cards.setBorder(MENU_BORDER);
 		turn2Cards.setSelected(turnedCardCount == 2);
 		turn2Cards.addActionListener(event -> solitaire.rules().setTurnedCardCount(2));
 
-		var turn3Cards = new JRadioButtonMenuItem("Tirer 3 cartes");
+		var turn3Cards = new JRadioButtonMenuItem(bundle.getString("draw_3"));
 		setFontSize(turn3Cards, FONT_SIZE);
 		turn3Cards.setBorder(MENU_BORDER);
 		turn3Cards.setSelected(turnedCardCount == 3);
@@ -93,19 +95,19 @@ public class SolitaireMenu extends JMenuBar {
 		drawNCardsGroup.add(turn2Cards);
 		drawNCardsGroup.add(turn3Cards);
 
-		var pass1 = new JRadioButtonMenuItem("1 passe");
+		var pass1 = new JRadioButtonMenuItem(bundle.getString("pass_1"));
 		setFontSize(pass1, FONT_SIZE);
 		pass1.setBorder(MENU_BORDER);
 		pass1.setSelected(recycleCount == 1);
 		pass1.addActionListener(event -> solitaire.rules().setPassCount(1));
 
-		var pass3 = new JRadioButtonMenuItem("3 passes");
+		var pass3 = new JRadioButtonMenuItem(bundle.getString("pass_3"));
 		setFontSize(pass3, FONT_SIZE);
 		pass3.setBorder(MENU_BORDER);
 		pass3.setSelected(recycleCount == 3);
 		pass3.addActionListener(event -> solitaire.rules().setPassCount(3));
 
-		var passUnlimited = new JRadioButtonMenuItem("∞ passes");
+		var passUnlimited = new JRadioButtonMenuItem(bundle.getString("pass_unlimited"));
 		setFontSize(passUnlimited, FONT_SIZE);
 		passUnlimited.setBorder(MENU_BORDER);
 		passUnlimited.setSelected(recycleCount == -1);
@@ -116,7 +118,7 @@ public class SolitaireMenu extends JMenuBar {
 		passGroup.add(pass3);
 		passGroup.add(passUnlimited);
 
-		var about = new JMenuItem("À propos");
+		var about = new JMenuItem(bundle.getString("about"));
 		setFontSize(about, FONT_SIZE);
 		about.setBorder(MENU_BORDER);
 		about.addActionListener(this::about);
