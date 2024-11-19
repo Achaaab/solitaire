@@ -7,14 +7,14 @@ package com.github.achaaab.solitaire.control;
 public interface StackTargetControl {
 
 	/**
-	 * @param stack
+	 * @param stack stack being dragged in
 	 * @since 0.0.0
 	 */
-	void dragIn(TransferableStackControl stack);
+	void dragIn(DraggedStack stack);
 
 	/**
-	 * @param stack
+	 * @param stack stack being dropped
 	 * @since 0.0.0
 	 */
-	void drop(TransferableStackControl stack);
+	void drop(DraggedStack stack);
 }

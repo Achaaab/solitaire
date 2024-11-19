@@ -1,21 +1,22 @@
-<html>
-<body style="font-size: {{ font-size }}pt">
+<html lang="en">
+<body style="font-size: {{ font_size }}pt">
+<p>Cette pile est une colonne. Dans une colonne, les cartes doivent être empilées du Roi jusqu'à l'As,
+    en alternant les couleurs
+    (<span style="color:#FF0000"><b>Rouge</b></span> / <span style="color:#000000"><b>Noire</b></span>).
+    For example:</p>
 <ul>
-    <li>Dans ce tas, les couleurs doivent être alternées
-        (<span style="color:#FF0000">Rouge</span> /
-        <span style="color:#000000">Noire</span>).
+    <li style="margin-bottom: {{ item_margin }}px">
+        <span style="color:#FF0000; font-size: {{ card_font_size }}pt">🂾</span> sur
+        une colonne vide,
     </li>
-
-    <li>De plus la valeur de la carte posée doit être juste inférieure
-        à la précédente.
+    <li style="margin-bottom: {{ item_margin }}px">
+        <span style="color:#FF0000; font-size: {{ card_font_size }}pt">🂭</span> sur
+        <span style="color:#FF0000; font-size: {{ card_font_size }}pt">🂾</span>,
     </li>
-
-    <li>Par exemple : <span style="color:#000000">🂭</span>
-        sur <span style="color:#FF0000">🂾</span> ou <span style="color:#FF0000">🃊</span>
-        sur <span style="color:#000000">🂫</span>.
+    <li>
+        <span style="color:#000000; font-size: {{ card_font_size }}pt">🃊</span> sur
+        <span style="color:#000000; font-size: {{ card_font_size }}pt">🂫</span>.
     </li>
-
-    <li>Dans un tas vide, vous ne pouvez poser qu'un Roi.</li>
 </ul>
 </body>
 </html>

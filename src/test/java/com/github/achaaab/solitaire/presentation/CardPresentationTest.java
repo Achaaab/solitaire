@@ -22,6 +22,6 @@ public class CardPresentationTest {
 
 		setTheme(ByronKnollTheme.INSTANCE);
 		var card = ControlFactory.INSTANCE.newCard(ACE, SPADE);
-		show(card.getPresentation(), "card presentation test");
+		show(card.presentation(), "card presentation test");
 	}
 }

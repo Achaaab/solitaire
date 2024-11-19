@@ -1,6 +1,6 @@
 package com.github.achaaab.solitaire.presentation.dragndrop;
 
-import com.github.achaaab.solitaire.control.TransferableStackControl;
+import com.github.achaaab.solitaire.control.DraggedStack;
 import com.github.achaaab.solitaire.control.StackSourceControl;
 import com.github.achaaab.solitaire.presentation.CardPresentation;
 
@@ -32,7 +32,7 @@ public class DragSourceManager extends DragSourceAdapter {
 
 	private DragGestureEvent trigger;
 	private Point cursorLocationOnCard;
-	private TransferableStackControl stack;
+	private DraggedStack stack;
 
 	/**
 	 * @param sourceControl
@@ -77,11 +77,11 @@ public class DragSourceManager extends DragSourceAdapter {
 	 * @param stack stack of cards being dragged
 	 * @since 0.0.0
 	 */
-	public void initiateDragAndDrop(Point sourceLocation, TransferableStackControl stack) {
+	public void initiateDragAndDrop(Point sourceLocation, DraggedStack stack) {
 
 		this.stack = stack;
 
-		var stackPresentation = stack.getPresentation();
+		var stackPresentation = stack.presentation();
 		var rootPane = sourceContainer.getRootPane();
 
 		rootPane.add(stackPresentation, 0);
@@ -98,7 +98,7 @@ public class DragSourceManager extends DragSourceAdapter {
 	@Override
 	public void dragMouseMoved(DragSourceDragEvent event) {
 
-		var stackPresentation = stack.getPresentation();
+		var stackPresentation = stack.presentation();
 		var container = stackPresentation.getParent();
 
 		var cursorLocationOnContainer = event.getLocation();

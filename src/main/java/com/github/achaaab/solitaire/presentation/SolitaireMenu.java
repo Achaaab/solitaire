@@ -49,7 +49,9 @@ public class SolitaireMenu extends JMenuBar {
 		this.solitaire = solitaire;
 
 		var bundle = getBundle("messages/menu");
-		aboutMessage = getMessage("messages/about.html", Map.of("font-size", scale(16)));
+
+		aboutMessage = getMessage("messages/about.html", Map.of(
+				"font_size", scale(16)));
 
 		var file = new JMenu(bundle.getString("file"));
 		setFontSize(file, FONT_SIZE);

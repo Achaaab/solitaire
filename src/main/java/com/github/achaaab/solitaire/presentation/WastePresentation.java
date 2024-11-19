@@ -1,6 +1,6 @@
 package com.github.achaaab.solitaire.presentation;
 
-import com.github.achaaab.solitaire.control.TransferableStackControl;
+import com.github.achaaab.solitaire.control.DraggedStack;
 import com.github.achaaab.solitaire.control.WasteControl;
 import com.github.achaaab.solitaire.presentation.audio.SoundEffect;
 import com.github.achaaab.solitaire.presentation.dragndrop.DragSourceManager;
@@ -33,7 +33,7 @@ public class WastePresentation extends StackPresentation implements StackSourceP
 	}
 
 	@Override
-	public void initiateDragAndDrop(Point sourceLocation, TransferableStackControl stack) {
+	public void initiateDragAndDrop(Point sourceLocation, DraggedStack stack) {
 		dragSourceManager.initiateDragAndDrop(sourceLocation, stack);
 	}
 

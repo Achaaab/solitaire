@@ -11,7 +11,7 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.io.IOException;
 
-import static com.github.achaaab.solitaire.presentation.dragndrop.TransferableStackPresentation.DATA_FLAVOR;
+import static com.github.achaaab.solitaire.presentation.dragndrop.DraggedStackPresentation.DATA_FLAVOR;
 
 /**
  * @author Jonathan Guéhenneux
@@ -21,7 +21,7 @@ public class DropTargetManager extends DropTargetAdapter {
 
 	private final StackTargetControl targetControl;
 
-	private TransferableStackPresentation incomingDeck;
+	private DraggedStackPresentation incomingDeck;
 	private DropTargetDropEvent incomingEvent;
 
 	/**
@@ -47,10 +47,10 @@ public class DropTargetManager extends DropTargetAdapter {
 
 				var transferData = transferable.getTransferData(DATA_FLAVOR);
 
-				if (transferData instanceof TransferableStackPresentation stack) {
+				if (transferData instanceof DraggedStackPresentation stack) {
 
 					incomingDeck = stack;
-					targetControl.dragIn(stack.getControl());
+					targetControl.dragIn(stack.control());
 				}
 			}
 
@@ -69,7 +69,7 @@ public class DropTargetManager extends DropTargetAdapter {
 	public void drop(DropTargetDropEvent event) {
 
 		incomingEvent = event;
-		targetControl.drop(incomingDeck.getControl());
+		targetControl.drop(incomingDeck.control());
 	}
 
 	/**

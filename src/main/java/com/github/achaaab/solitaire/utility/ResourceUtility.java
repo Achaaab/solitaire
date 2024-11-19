@@ -48,7 +48,7 @@ public class ResourceUtility {
 	private static final ClassLoader CLASS_LOADER = ResourceUtility.class.getClassLoader();
 	private static final Font DEFAULT_FONT = new Font(DIALOG, PLAIN, 12);
 
-	private static final Pattern MESSAGE_PARAMETER_PATTERN = compile("\\{\\{(.+)}}");
+	private static final Pattern MESSAGE_PARAMETER_PATTERN = compile("\\{\\{(\\s*\\w+\\s*)}}");
 
 	/**
 	 * Loads an image resource.
@@ -174,7 +174,6 @@ public class ResourceUtility {
 		var defaultLanguage = Locale.getDefault().getLanguage();
 
 		var resourceNames = new ArrayList<String>();
-		resourceNames.add(name);
 
 		var extensionIndex = name.lastIndexOf('.');
 
@@ -187,6 +186,8 @@ public class ResourceUtility {
 			resourceNames.add(
 					name.substring(0, extensionIndex) + '_' + defaultLanguage + name.substring(extensionIndex));
 		}
+
+		resourceNames.add(name);
 
 		return getUrl(resourceNames).
 				map(url -> getMessage(url, parameters)).

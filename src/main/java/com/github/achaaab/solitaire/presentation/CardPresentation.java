@@ -10,6 +10,8 @@ import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.compu
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.getTheme;
 
 /**
+ * Presentation part of the Card component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -21,7 +23,8 @@ public class CardPresentation extends JComponent {
 	protected JLabel backImageLabel;
 
 	/**
-	 * @param control
+	 * @param control control part of this component
+	 * @since 0.0.0
 	 */
 	public CardPresentation(CardControl control) {
 

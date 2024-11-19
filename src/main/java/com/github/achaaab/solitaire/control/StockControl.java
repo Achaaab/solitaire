@@ -5,8 +5,6 @@ import com.github.achaaab.solitaire.abstraction.Stock;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 import com.github.achaaab.solitaire.presentation.StockPresentation;
 
-import static javax.swing.SwingUtilities.invokeLater;
-
 /**
  * @author Jonathan Guéhenneux
  * @since 0.0.0
@@ -27,14 +25,15 @@ public class StockControl extends Stock {
 
 		super.push(card);
 
-		invokeLater(() -> presentation.push(((CardControl) card).getPresentation()));
+		presentation.push(((CardControl) card).presentation());
 	}
 
 	@Override
 	public Card pop() {
 
 		var card = (CardControl) super.pop();
-		invokeLater(presentation::pop);
+
+		presentation.pop();
 
 		return card;
 	}

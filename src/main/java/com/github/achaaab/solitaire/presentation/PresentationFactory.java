@@ -5,9 +5,9 @@ import com.github.achaaab.solitaire.control.FoundationControl;
 import com.github.achaaab.solitaire.control.PileControl;
 import com.github.achaaab.solitaire.control.SolitaireControl;
 import com.github.achaaab.solitaire.control.StockControl;
-import com.github.achaaab.solitaire.control.TransferableStackControl;
+import com.github.achaaab.solitaire.control.DraggedStack;
 import com.github.achaaab.solitaire.control.WasteControl;
-import com.github.achaaab.solitaire.presentation.dragndrop.TransferableStackPresentation;
+import com.github.achaaab.solitaire.presentation.dragndrop.DraggedStackPresentation;
 
 /**
  * @author Jonathan Guéhenneux
@@ -65,8 +65,8 @@ public class PresentationFactory {
 	 * @param control
 	 * @return
 	 */
-	public TransferableStackPresentation newTransferableStack(TransferableStackControl control) {
-		return new TransferableStackPresentation(control);
+	public DraggedStackPresentation newDraggedStack(DraggedStack control) {
+		return new DraggedStackPresentation(control);
 	}
 
 	/**

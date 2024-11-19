@@ -5,32 +5,21 @@ import com.github.achaaab.solitaire.abstraction.Pile;
 import com.github.achaaab.solitaire.presentation.PilePresentation;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 
-import java.util.Map;
-
-import static com.github.achaaab.solitaire.presentation.SwingUtility.scale;
-import static com.github.achaaab.solitaire.utility.ResourceUtility.getMessage;
-import static javax.swing.SwingUtilities.invokeLater;
-
 /**
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
 public class PileControl extends Pile implements StackSourceControl, StackTargetControl {
 
-	private static int missedDropCount = 0;
-
 	private final PilePresentation presentation;
-	private final String missedDropMessage;
 	private MessageControl message;
-	private TransferableStackControl draggedOutStack;
+	private DraggedStack draggedOutStack;
 
 	/**
 	 * @since 0.0.0
 	 */
 	public PileControl() {
-
 		presentation = PresentationFactory.INSTANCE.newPile(this);
-		missedDropMessage = getMessage("messages/pile.html", Map.of("font-size", scale(16)));
 	}
 
 	@Override
@@ -38,14 +27,15 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 
 		super.push(card);
 
-		invokeLater(() -> presentation.push(((CardControl) card).getPresentation()));
+		presentation.push(((CardControl) card).presentation());
 	}
 
 	@Override
 	public Card pop() {
 
 		var card = (CardControl) super.pop();
-		invokeLater(presentation::pop);
+
+		presentation.pop();
 
 		return card;
 	}
@@ -56,9 +46,9 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 		if (card.isFaceUp()) {
 
 			var cardIndex = indexOf(card);
-			var sourceLocation = card.getPresentation().getLocation();
+			var sourceLocation = card.presentation().getLocation();
 
-			draggedOutStack = ControlFactory.INSTANCE.newTransferableStack(cardIndex + 1);
+			draggedOutStack = ControlFactory.INSTANCE.newDraggedStack(cardIndex + 1);
 			var temporaryStack = ControlFactory.INSTANCE.newStack();
 
 			while (temporaryStack.size() <= cardIndex) {
@@ -71,14 +61,14 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	}
 
 	@Override
-	public void dragIn(TransferableStackControl stack) {
+	public void dragIn(DraggedStack stack) {
 
 		var accepted = stack == draggedOutStack || canPush(stack);
 		stack.showAccepted(accepted);
 	}
 
 	@Override
-	public void drop(TransferableStackControl stack) {
+	public void drop(DraggedStack stack) {
 
 		var accepted = stack == draggedOutStack || canPush(stack);
 
@@ -93,17 +83,11 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 		} else {
 
 			presentation.rejectDrop();
-
-			if (++missedDropCount == 3) {
-
-				message.display(missedDropMessage);
-				missedDropCount = 0;
-			}
 		}
 	}
 
 	@Override
-	public void dropSucceeded(TransferableStackControl stack) {
+	public void dropSucceeded(DraggedStack stack) {
 
 		if (canFlip()) {
 			flip();
@@ -111,7 +95,7 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	}
 
 	@Override
-	public void dropFailed(TransferableStackControl stack) {
+	public void dropFailed(DraggedStack stack) {
 
 		var temporaryStack = ControlFactory.INSTANCE.newStack();
 		temporaryStack.push(stack);
@@ -119,7 +103,7 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	}
 
 	/**
-	 * @param message
+	 * @param message message component
 	 * @since 0.0.0
 	 */
 	public void setMessage(MessageControl message) {
@@ -127,7 +111,17 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	}
 
 	/**
-	 * @return
+	 * Displays an HTML document as a message for the user.
+	 *
+	 * @param text HTML document to display
+	 * @since 0.0.0
+	 */
+	public void displayMessage(String text) {
+		message.display(text);
+	}
+
+	/**
+	 * @return presentation of this pile
 	 * @since 0.0.0
 	 */
 	public PilePresentation presentation() {

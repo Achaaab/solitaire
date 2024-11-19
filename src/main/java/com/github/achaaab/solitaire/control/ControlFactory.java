@@ -53,10 +53,14 @@ public class ControlFactory extends Factory {
 	}
 
 	/**
-	 * @return
+	 * Creates a new dragged stack component.
+	 *
+	 * @param capacity number of cards that will be stacked
+	 * @return created dragged stack
+	 * @since 0.0.0
 	 */
-	public TransferableStackControl newTransferableStack(int capacity) {
-		return new TransferableStackControl(capacity);
+	public DraggedStack newDraggedStack(int capacity) {
+		return new DraggedStack(capacity);
 	}
 
 	@Override
@@ -65,7 +69,9 @@ public class ControlFactory extends Factory {
 	}
 
 	/**
-	 * @return
+	 * Creates a new message component.
+	 *
+	 * @return created message component
 	 * @since 0.0.0
 	 */
 	public MessageControl newMessage() {

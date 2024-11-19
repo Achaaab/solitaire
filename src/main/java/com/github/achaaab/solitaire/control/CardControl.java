@@ -1,14 +1,14 @@
 package com.github.achaaab.solitaire.control;
 
+import com.github.achaaab.solitaire.abstraction.Card;
 import com.github.achaaab.solitaire.abstraction.Rank;
 import com.github.achaaab.solitaire.abstraction.Suit;
-import com.github.achaaab.solitaire.abstraction.Card;
 import com.github.achaaab.solitaire.presentation.CardPresentation;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 
-import static javax.swing.SwingUtilities.invokeLater;
-
 /**
+ * Control part of a card component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -17,8 +17,11 @@ public class CardControl extends Card {
 	private final CardPresentation presentation;
 
 	/**
-	 * @param rank
-	 * @param suit
+	 * Creates a new card.
+	 *
+	 * @param rank rank of the card to create
+	 * @param suit suit of the card to create
+	 * @since 0.0.0
 	 */
 	public CardControl(Rank rank, Suit suit) {
 
@@ -32,13 +35,14 @@ public class CardControl extends Card {
 
 		super.setFaceUp(faceUp);
 
-		invokeLater(() -> presentation.setFaceUp(isFaceUp()));
+		presentation.setFaceUp(isFaceUp());
 	}
 
 	/**
-	 * @return
+	 * @return presentation part of this card
+	 * @since 0.0.0
 	 */
-	public CardPresentation getPresentation() {
+	public CardPresentation presentation() {
 		return presentation;
 	}
 }

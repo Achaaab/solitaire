@@ -1,6 +1,6 @@
 package com.github.achaaab.solitaire.presentation.dragndrop;
 
-import com.github.achaaab.solitaire.control.TransferableStackControl;
+import com.github.achaaab.solitaire.control.DraggedStack;
 
 import java.awt.Point;
 
@@ -15,5 +15,5 @@ public interface StackSourcePresentation {
 	 * @param stack stack of cards being dragged
 	 * @since 0.0.0
 	 */
-	void initiateDragAndDrop(Point sourceLocation, TransferableStackControl stack);
+	void initiateDragAndDrop(Point sourceLocation, DraggedStack stack);
 }

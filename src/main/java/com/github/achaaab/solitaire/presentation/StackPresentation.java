@@ -12,10 +12,14 @@ import static java.lang.Math.toIntExact;
 import static javax.swing.BorderFactory.createLineBorder;
 
 /**
+ * Generic presentation part for a stack component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
 public class StackPresentation extends JComponent {
+
+	protected static final int MISSED_DROP_COUNT_BEFORE_HELP = 3;
 
 	protected final Stack control;
 	private final int gapX;
@@ -48,7 +52,10 @@ public class StackPresentation extends JComponent {
 	}
 
 	/**
-	 * @param card
+	 * Place a card on the top of this pile.
+	 *
+	 * @param card card to push in this stack
+	 * @since 0.0.0
 	 */
 	public void push(CardPresentation card) {
 
@@ -63,7 +70,9 @@ public class StackPresentation extends JComponent {
 	}
 
 	/**
+	 * Removes the card on the top of this pile.
 	 *
+	 * @since 0.0.0
 	 */
 	public void pop() {
 

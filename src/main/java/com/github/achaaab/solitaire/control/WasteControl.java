@@ -5,8 +5,6 @@ import com.github.achaaab.solitaire.abstraction.Waste;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 import com.github.achaaab.solitaire.presentation.WastePresentation;
 
-import static javax.swing.SwingUtilities.invokeLater;
-
 /**
  * @author Jonathan Guéhenneux
  * @since 0.0.0
@@ -27,20 +25,21 @@ public class WasteControl extends Waste implements StackSourceControl {
 
 		super.push(card);
 
-		invokeLater(() -> presentation.push(((CardControl) card).getPresentation()));
+		presentation.push(((CardControl) card).presentation());
 	}
 
 	@Override
 	public Card pop() {
 
 		var card = (CardControl) super.pop();
-		invokeLater(presentation::pop);
+
+		presentation.pop();
 
 		return card;
 	}
 
 	@Override
-	public void dropFailed(TransferableStackControl stack) {
+	public void dropFailed(DraggedStack stack) {
 		push(stack);
 	}
 
@@ -49,8 +48,8 @@ public class WasteControl extends Waste implements StackSourceControl {
 
 		if (card == getFirst()) {
 
-			var sourceLocation = card.getPresentation().getLocation();
-			var transferableStack = ControlFactory.INSTANCE.newTransferableStack(1);
+			var sourceLocation = card.presentation().getLocation();
+			var transferableStack = ControlFactory.INSTANCE.newDraggedStack(1);
 			transferableStack.push(pop());
 			presentation.initiateDragAndDrop(sourceLocation, transferableStack);
 		}
