@@ -15,8 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static com.github.achaaab.solitaire.presentation.SwingUtility.scale;
-import static com.github.achaaab.solitaire.presentation.SwingUtility.scaleFloat;
+import static com.github.achaaab.solitaire.utility.SwingUtility.scale;
+import static com.github.achaaab.solitaire.utility.SwingUtility.scaleFloat;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.SOUTH;
 import static java.awt.Desktop.getDesktop;

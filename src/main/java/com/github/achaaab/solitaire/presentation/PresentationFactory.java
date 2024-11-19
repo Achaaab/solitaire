@@ -48,6 +48,7 @@ public class PresentationFactory {
 	/**
 	 * @param control
 	 * @return
+	 * @since 0.0.0
 	 */
 	public PilePresentation newPile(PileControl control) {
 		return new PilePresentation(control);
@@ -56,6 +57,7 @@ public class PresentationFactory {
 	/**
 	 * @param control
 	 * @return
+	 * @since 0.0.0
 	 */
 	public CardPresentation newCard(CardControl control) {
 		return new CardPresentation(control);
@@ -64,6 +66,7 @@ public class PresentationFactory {
 	/**
 	 * @param control
 	 * @return
+	 * @since 0.0.0
 	 */
 	public DraggedStackPresentation newDraggedStack(DraggedStack control) {
 		return new DraggedStackPresentation(control);
@@ -72,16 +75,20 @@ public class PresentationFactory {
 	/**
 	 * @param control
 	 * @return
+	 * @since 0.0.0
 	 */
 	public FoundationPresentation newFoundation(FoundationControl control) {
 		return new FoundationPresentation(control);
 	}
 
 	/**
-	 * @param solitaire
-	 * @return
+	 * Creates a new window including a menu for the given Solitaire.
+	 *
+	 * @param control control part of a Solitaire
+	 * @return created window
+	 * @since 0.0.0
 	 */
-	public SolitaireWindow newWindow(SolitaireControl solitaire) {
-		return new SolitaireWindow(solitaire);
+	public SolitaireWindow newWindow(SolitaireControl control) {
+		return new SolitaireWindow(control);
 	}
 }

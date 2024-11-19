@@ -3,18 +3,14 @@ package com.github.achaaab.solitaire.utility;
 import org.slf4j.Logger;
 
 import javax.imageio.ImageIO;
-import java.awt.Font;
-import java.awt.FontFormatException;
+import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -23,13 +19,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import static java.awt.Font.DIALOG;
-import static java.awt.Font.PLAIN;
-import static java.awt.Font.TRUETYPE_FONT;
-import static java.awt.Font.createFont;
-import static java.nio.file.FileSystems.newFileSystem;
-import static java.nio.file.Files.readAllLines;
-import static java.util.Collections.emptyMap;
+import static java.awt.Image.SCALE_SMOOTH;
+import static java.lang.Math.round;
+import static java.lang.Math.toIntExact;
 import static java.util.Objects.requireNonNull;
 import static java.util.regex.Pattern.compile;
 import static java.util.stream.Collectors.joining;
@@ -46,9 +38,48 @@ public class ResourceUtility {
 	private static final Logger LOGGER = getLogger(ResourceUtility.class);
 
 	private static final ClassLoader CLASS_LOADER = ResourceUtility.class.getClassLoader();
-	private static final Font DEFAULT_FONT = new Font(DIALOG, PLAIN, 12);
-
 	private static final Pattern MESSAGE_PARAMETER_PATTERN = compile("\\{\\{(\\s*\\w+\\s*)}}");
+
+	/**
+	 * @param name
+	 * @param targetWidth target image width in pixels, {@code null} to keep original image width
+	 * @param targetWidth target image height in pixels, {@code null} to keep original image height
+	 * @return
+	 * @since 0.0.0
+	 */
+	public static ImageIcon getIcon(String name, Double targetWidth, Double targetHeight) {
+
+		var image = loadOptionalImage(name).orElseThrow();
+		var scaledImage = scale(image, targetWidth, targetHeight);
+
+		return new ImageIcon(scaledImage);
+	}
+
+	/**
+	 * @param image image to scale
+	 * @param targetWidth target width in pixels
+	 * @param targetHeight target height in pixels
+	 * @return scaled image
+	 */
+	private static Image scale(BufferedImage image, Double targetWidth, Double targetHeight) {
+
+		Image scaledImage = image;
+		var width = image.getWidth();
+		var height = image.getHeight();
+
+		targetWidth = targetWidth == null ? width : targetWidth;
+		targetHeight = targetHeight == null ? height : targetHeight;
+
+		if (width != targetWidth || height != targetHeight) {
+
+			scaledImage = image.getScaledInstance(
+					toIntExact(round(targetWidth)),
+					toIntExact(round(targetHeight)),
+					SCALE_SMOOTH);
+		}
+
+		return scaledImage;
+	}
 
 	/**
 	 * Loads an image resource.
@@ -57,9 +88,9 @@ public class ResourceUtility {
 	 * @return loaded image resource
 	 * @since 0.0.0
 	 */
-	public static Optional<Image> loadOptionalImage(String resourceName) {
+	public static Optional<BufferedImage> loadOptionalImage(String resourceName) {
 
-		Optional<Image> image;
+		Optional<BufferedImage> image;
 
 		var url = CLASS_LOADER.getResource(resourceName);
 
@@ -85,17 +116,6 @@ public class ResourceUtility {
 	}
 
 	/**
-	 * Opens an input stream on a named resource.
-	 *
-	 * @param resourceName name of the resource to open
-	 * @return open input stream, {@code null} if the resource is not found
-	 * @since 0.0.0
-	 */
-	public static InputStream openInputStream(String resourceName) {
-		return CLASS_LOADER.getResourceAsStream(resourceName);
-	}
-
-	/**
 	 * Gets a URL to a named resource.
 	 *
 	 * @param resourceName name of the resource
@@ -105,62 +125,6 @@ public class ResourceUtility {
 
 		var url = CLASS_LOADER.getResource(resourceName);
 		return requireNonNull(url);
-	}
-
-	/**
-	 * Loads a font resource.
-	 *
-	 * @param resourceName name of the font resource
-	 * @return loaded font
-	 * @since 0.0.0
-	 */
-	public static Font loadFont(String resourceName) {
-
-		var font = DEFAULT_FONT;
-
-		try (var inputStream = openInputStream(resourceName)) {
-			font = createFont(TRUETYPE_FONT, requireNonNull(inputStream));
-		} catch (IOException | FontFormatException | NullPointerException exception) {
-			LOGGER.error("error while loading font: {}", resourceName, exception);
-		}
-
-		return font;
-	}
-
-	/**
-	 * Reads all lines from a resource.
-	 *
-	 * @param resourceName name of the resource to read
-	 * @param charset charset to use for character decoding
-	 * @return read lines
-	 * @since 0.0.0
-	 */
-	public static List<String> readLines(String resourceName, Charset charset) {
-
-		List<String> lines = null;
-
-		try {
-			var url = CLASS_LOADER.getResource(resourceName);
-
-			if (url != null) {
-
-				var uri = url.toURI();
-				var scheme = uri.getScheme();
-
-				if (!scheme.equals("file")) {
-					newFileSystem(uri, emptyMap());
-				}
-
-				var path = Path.of(uri);
-				lines = readAllLines(path, charset);
-			}
-
-		} catch (IOException | URISyntaxException exception) {
-
-			LOGGER.error("error while reading lines of resource {}", resourceName, exception);
-		}
-
-		return lines;
 	}
 
 	/**
@@ -237,7 +201,7 @@ public class ResourceUtility {
 	}
 
 	/**
-	 * private constructor to prevent instanciation of this utility class
+	 * private constructor to prevent instantiation of this utility class
 	 *
 	 * @since 0.0.0
 	 */

@@ -23,9 +23,18 @@ public interface Audio {
 	void setVolume(int volume);
 
 	/**
-	 * Plays this audio.
+	 * Starts to play this audio.
 	 *
+	 * @return whether this audio could be started
 	 * @since 0.0.0
 	 */
-	void play();
+	boolean play();
+
+	/**
+	 * Starts to play this audio and waits until it ends.
+	 *
+	 * @return whether this audio could be played
+	 * @since 0.0.0
+	 */
+	boolean playAndWait();
 }

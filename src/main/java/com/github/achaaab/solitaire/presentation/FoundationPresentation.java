@@ -12,7 +12,7 @@ import java.awt.Point;
 import java.util.Map;
 
 import static com.github.achaaab.solitaire.abstraction.Rank.COUNT;
-import static com.github.achaaab.solitaire.presentation.SwingUtility.scale;
+import static com.github.achaaab.solitaire.utility.SwingUtility.scale;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.computeHeight;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.computeWidth;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.getTheme;

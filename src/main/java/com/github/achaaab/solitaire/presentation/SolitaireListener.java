@@ -17,7 +17,7 @@ public class SolitaireListener extends WindowAdapter {
 	@Override
 	public void windowClosing(WindowEvent event) {
 
-		getTheme().getExitSound().ifPresent(SoundEffect::play);
+		getTheme().getExitSound().ifPresent(SoundEffect::playAndWait);
 		exit(0);
 	}
 

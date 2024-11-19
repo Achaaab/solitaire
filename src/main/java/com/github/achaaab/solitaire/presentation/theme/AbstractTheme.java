@@ -1,23 +1,16 @@
 package com.github.achaaab.solitaire.presentation.theme;
 
-import com.github.achaaab.solitaire.presentation.SwingUtility;
+import com.github.achaaab.solitaire.utility.SwingUtility;
 import com.github.achaaab.solitaire.presentation.audio.SoundEffect;
 import org.slf4j.Logger;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.Optional;
 
-import static java.awt.Image.SCALE_SMOOTH;
-import static java.lang.ClassLoader.getSystemResource;
-import static java.lang.Math.round;
-import static java.lang.Math.toIntExact;
+import static com.github.achaaab.solitaire.utility.ResourceUtility.getIcon;
 import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -32,38 +25,13 @@ public abstract class AbstractTheme implements Theme {
 	protected static final int DEFAULT_CARD_WIDTH = SwingUtility.scale(90.00f);
 	protected static final int DEFAULT_CARD_HEIGHT = SwingUtility.scale(130.68f);
 
-	/**
-	 * @param image image to scale
-	 * @param targetWidth target width in pixels
-	 * @param targetHeight target height in pixels
-	 * @return scaled image
-	 */
-	private static Image scale(BufferedImage image, Double targetWidth, Double targetHeight) {
-
-		Image scaledImage = image;
-		var width = image.getWidth();
-		var height = image.getHeight();
-
-		targetWidth = targetWidth == null ? width : targetWidth;
-		targetHeight = targetHeight == null ? height : targetHeight;
-
-		if (width != targetWidth || height != targetHeight) {
-
-			scaledImage = image.getScaledInstance(
-					toIntExact(round(targetWidth)),
-					toIntExact(round(targetHeight)),
-					SCALE_SMOOTH);
-		}
-
-		return scaledImage;
-	}
-
 	private final String name;
 
 	private final Map<String, SoundEffect> soundEffects;
 
 	/**
 	 * @param name
+	 * @since 0.0.0
 	 */
 	public AbstractTheme(String name) {
 
@@ -85,6 +53,7 @@ public abstract class AbstractTheme implements Theme {
 	/**
 	 * @param name
 	 * @return
+	 * @since 0.0.0
 	 */
 	protected Optional<SoundEffect> getSoundEffect(String name) {
 
@@ -120,14 +89,6 @@ public abstract class AbstractTheme implements Theme {
 
 	/**
 	 * @param imageName
-	 * @return
-	 */
-	protected ImageIcon getImage(String imageName) {
-		return getImage(imageName, null, null);
-	}
-
-	/**
-	 * @param imageName
 	 * @param targetWidth target image width in pixels, {@code null} to keep original image width
 	 * @param targetWidth target image height in pixels, {@code null} to keep original image height
 	 * @return
@@ -136,19 +97,7 @@ public abstract class AbstractTheme implements Theme {
 	protected ImageIcon getImage(String imageName, Double targetWidth, Double targetHeight) {
 
 		var resourceName = "themes/" + name + "/images/" + imageName;
-
-		try {
-
-			var imageUrl = getSystemResource(resourceName);
-			var bufferedImage = ImageIO.read(imageUrl);
-			var scaledImage = scale(bufferedImage, targetWidth, targetHeight);
-
-			return new ImageIcon(scaledImage);
-
-		} catch (IOException | IllegalArgumentException cause) {
-
-			throw new MissingResourceException("cannot find " + resourceName, resourceName, null);
-		}
+		return getIcon(resourceName, targetWidth, targetHeight);
 	}
 
 	@Override

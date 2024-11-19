@@ -3,9 +3,14 @@ package com.github.achaaab.solitaire.presentation.audio;
 import com.adonax.audiocue.AudioCue;
 import org.slf4j.Logger;
 
+import java.time.Duration;
+
 import static com.adonax.audiocue.AudioCue.makeStereoCue;
 import static com.github.achaaab.solitaire.utility.ResourceUtility.getResourceUrl;
 import static java.lang.System.nanoTime;
+import static java.lang.Thread.currentThread;
+import static java.lang.Thread.sleep;
+import static java.time.Duration.ofNanos;
 import static java.util.stream.IntStream.range;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -24,6 +29,7 @@ public class SoundEffect extends NamedAudio {
 
 	private int volume;
 	private AudioCue cue;
+	private Duration duration;
 	private Long lastPlayTime;
 	private long minimumDelay;
 
@@ -49,8 +55,8 @@ public class SoundEffect extends NamedAudio {
 			cue.open();
 			lastPlayTime = null;
 
-			var microseconds = cue.getMicrosecondLength();
-			minimumDelay = microseconds * 1_000 / polyphony;
+			duration = ofNanos(1_000 * cue.getMicrosecondLength());
+			minimumDelay = duration.dividedBy(polyphony).toNanos();
 
 		} catch (Exception exception) {
 
@@ -73,7 +79,9 @@ public class SoundEffect extends NamedAudio {
 	}
 
 	@Override
-	public void play() {
+	public boolean play() {
+
+		var started = false;
 
 		if (cue != null) {
 
@@ -83,7 +91,36 @@ public class SoundEffect extends NamedAudio {
 
 				lastPlayTime = nanoTime;
 				cue.play(volume / VOLUME_SCALE);
+				started = true;
 			}
 		}
+
+		return started;
+	}
+
+	/**
+	 * Plays this audio and waits until it is completed plus a small amount of time.
+	 *
+	 * @since 0.0.0
+	 */
+	public boolean playAndWait() {
+
+		var played = false;
+
+		if (cue != null) {
+
+			if (play()) {
+
+				try {
+					sleep(duration.plusMillis(100).toMillis());
+				} catch (InterruptedException interruptedException) {
+					currentThread().interrupt();
+				}
+
+				played = true;
+			}
+		}
+
+		return played;
 	}
 }

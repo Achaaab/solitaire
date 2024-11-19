@@ -12,10 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.Map;
 
-import static com.github.achaaab.solitaire.presentation.SwingUtility.scale;
-import static com.github.achaaab.solitaire.presentation.SwingUtility.scaleFloat;
-import static com.github.achaaab.solitaire.presentation.SwingUtility.setFontSize;
+import static com.github.achaaab.solitaire.utility.ResourceUtility.getIcon;
 import static com.github.achaaab.solitaire.utility.ResourceUtility.getMessage;
+import static com.github.achaaab.solitaire.utility.SwingUtility.isDark;
+import static com.github.achaaab.solitaire.utility.SwingUtility.scale;
+import static com.github.achaaab.solitaire.utility.SwingUtility.scaleFloat;
+import static com.github.achaaab.solitaire.utility.SwingUtility.setFontSize;
 import static java.awt.event.WindowEvent.WINDOW_CLOSING;
 import static java.util.ResourceBundle.getBundle;
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -28,6 +30,7 @@ import static javax.swing.SwingUtilities.getWindowAncestor;
 public class SolitaireMenu extends JMenuBar {
 
 	private static final float FONT_SIZE = scaleFloat(13);
+	private static final double ICON_SIZE = scale(20);
 
 	/**
 	 * Depending on the Look & Feel, this border can be necessary to make the menu bar more ergonomic.
@@ -41,12 +44,16 @@ public class SolitaireMenu extends JMenuBar {
 	private final String aboutMessage;
 
 	/**
-	 * @param solitaire
+	 * Creates a menu for a given Solitaire.
+	 *
+	 * @param solitaire control part of a Solitaire
 	 * @since 0.0.0
 	 */
 	public SolitaireMenu(SolitaireControl solitaire) {
 
 		this.solitaire = solitaire;
+
+		var dark = isDark(getBackground());
 
 		var bundle = getBundle("messages/menu");
 
@@ -54,6 +61,7 @@ public class SolitaireMenu extends JMenuBar {
 				"font_size", scale(16)));
 
 		var file = new JMenu(bundle.getString("file"));
+
 		setFontSize(file, FONT_SIZE);
 		file.setBorder(MENU_BORDER);
 
@@ -128,6 +136,18 @@ public class SolitaireMenu extends JMenuBar {
 		setFontSize(about, FONT_SIZE);
 		about.setBorder(MENU_BORDER);
 		about.addActionListener(this::about);
+
+		newGame.setIcon(dark ?
+				getIcon("icons/dark/reset_256.png", ICON_SIZE, ICON_SIZE) :
+				getIcon("icons/light/reset_256.png", ICON_SIZE, ICON_SIZE));
+
+		exit.setIcon(dark ?
+				getIcon("icons/dark/close_256.png", ICON_SIZE, ICON_SIZE) :
+				getIcon("icons/light/close_256.png", ICON_SIZE, ICON_SIZE));
+
+		about.setIcon(dark ?
+				getIcon("icons/dark/about_256.png", ICON_SIZE, ICON_SIZE) :
+				getIcon("icons/light/about_256.png", ICON_SIZE, ICON_SIZE));
 
 		file.add(newGame);
 		file.add(exit);
