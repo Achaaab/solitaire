@@ -31,7 +31,9 @@ public class Solitaire {
 	private int passCount;
 
 	/**
-	 * @param factory
+	 * Creates a new Solitaire.
+	 *
+	 * @param factory component factory
 	 * @since 0.0.0
 	 */
 	public Solitaire(Factory factory) {
@@ -52,7 +54,8 @@ public class Solitaire {
 	}
 
 	/**
-	 * Resets this Solitaire.
+	 * Transfers all the cards from the different stacks to the deck.
+	 * Then, shuffles the deck and sets up a new game.
 	 *
 	 * @since 0.0.0
 	 */
@@ -107,6 +110,7 @@ public class Solitaire {
 	/**
 	 * @param source
 	 * @param target
+	 * @since 0.0.0
 	 */
 	private void transfer(Stack source, Stack target) {
 		transfer(source, target, source.size());
@@ -127,7 +131,7 @@ public class Solitaire {
 	}
 
 	/**
-	 * Tries to move the first card if the given pile to the first foundation accepting it.
+	 * Tries to move the first card of the given stack to the first foundation accepting it.
 	 *
 	 * @param stack stack from which to move a card
 	 * @since 0.0.0
@@ -146,7 +150,11 @@ public class Solitaire {
 	}
 
 	/**
-	 * @return
+	 * Dealing is the action of transferring 1 or more cards from the stock to the waste.
+	 * Dealt cards are turned face up.
+	 * The number of dealt cards depends on the selected rules.
+	 *
+	 * @return whether the user can deal
 	 * @since 0.0.0
 	 */
 	public boolean canDeal() {
