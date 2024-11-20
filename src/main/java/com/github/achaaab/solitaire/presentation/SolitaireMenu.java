@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.Map;
 
-import static com.github.achaaab.solitaire.utility.ResourceUtility.getIcon;
+import static com.github.achaaab.solitaire.utility.ResourceUtility.loadIcon;
 import static com.github.achaaab.solitaire.utility.ResourceUtility.getMessage;
 import static com.github.achaaab.solitaire.utility.SwingUtility.isDark;
 import static com.github.achaaab.solitaire.utility.SwingUtility.scale;
@@ -138,16 +138,16 @@ public class SolitaireMenu extends JMenuBar {
 		about.addActionListener(this::about);
 
 		newGame.setIcon(dark ?
-				getIcon("icons/dark/reset_256.png", ICON_SIZE, ICON_SIZE) :
-				getIcon("icons/light/reset_256.png", ICON_SIZE, ICON_SIZE));
+				loadIcon("icons/dark/reset_256.png", ICON_SIZE, ICON_SIZE) :
+				loadIcon("icons/light/reset_256.png", ICON_SIZE, ICON_SIZE));
 
 		exit.setIcon(dark ?
-				getIcon("icons/dark/close_256.png", ICON_SIZE, ICON_SIZE) :
-				getIcon("icons/light/close_256.png", ICON_SIZE, ICON_SIZE));
+				loadIcon("icons/dark/close_256.png", ICON_SIZE, ICON_SIZE) :
+				loadIcon("icons/light/close_256.png", ICON_SIZE, ICON_SIZE));
 
 		about.setIcon(dark ?
-				getIcon("icons/dark/about_256.png", ICON_SIZE, ICON_SIZE) :
-				getIcon("icons/light/about_256.png", ICON_SIZE, ICON_SIZE));
+				loadIcon("icons/dark/about_256.png", ICON_SIZE, ICON_SIZE) :
+				loadIcon("icons/light/about_256.png", ICON_SIZE, ICON_SIZE));
 
 		file.add(newGame);
 		file.add(exit);

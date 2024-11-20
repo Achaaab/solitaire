@@ -68,6 +68,8 @@ public class SolitaireControl extends Solitaire {
 						recycle();
 					}
 				}
+
+				stock().presentation().showState(canDeal(), canRecycle());
 			}
 		});
 
@@ -86,8 +88,19 @@ public class SolitaireControl extends Solitaire {
 		});
 	}
 
+	@Override
+	public void reset() {
+
+		stock().presentation().showState(false, false);
+
+		super.reset();
+	}
+
 	/**
-	 * @param pile
+	 * Tries to move the first card of the given pile to the first foundation accepting it.
+	 * If the card is moved and the next card on the pile is turned face down, turn it face up.
+	 *
+	 * @param pile source pile
 	 * @since 0.0.0
 	 */
 	public void moveToFoundation(Pile pile) {
@@ -118,7 +131,7 @@ public class SolitaireControl extends Solitaire {
 	}
 
 	/**
-	 * @return
+	 * @return presentation part of this solitaire
 	 * @since 0.0.0
 	 */
 	public SolitairePresentation presentation() {
@@ -136,7 +149,7 @@ public class SolitaireControl extends Solitaire {
 	}
 
 	/**
-	 * @return
+	 * @return message panel to display HTML documents
 	 * @since 0.0.0
 	 */
 	public MessageControl message() {

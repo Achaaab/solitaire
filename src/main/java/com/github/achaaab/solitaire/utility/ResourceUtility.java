@@ -41,13 +41,28 @@ public class ResourceUtility {
 	private static final Pattern MESSAGE_PARAMETER_PATTERN = compile("\\{\\{(\\s*\\w+\\s*)}}");
 
 	/**
-	 * @param name
+	 * Loads an icon resource and scale it if necessary.
+	 *
+	 * @param name name of the icon resource to load
 	 * @param targetWidth target image width in pixels, {@code null} to keep original image width
-	 * @param targetWidth target image height in pixels, {@code null} to keep original image height
-	 * @return
+	 * @param targetHeight target image height in pixels, {@code null} to keep original image height
+	 * @return loaded and scaled icon
 	 * @since 0.0.0
 	 */
-	public static ImageIcon getIcon(String name, Double targetWidth, Double targetHeight) {
+	public static ImageIcon loadIcon(String name, Integer targetWidth, Integer targetHeight) {
+		return loadIcon(name, targetWidth.doubleValue(), targetHeight.doubleValue());
+	}
+
+	/**
+	 * Loads an icon resource and scale it if necessary.
+	 *
+	 * @param name name of the icon resource to load
+	 * @param targetWidth target image width in pixels, {@code null} to keep original image width
+	 * @param targetHeight target image height in pixels, {@code null} to keep original image height
+	 * @return loaded and scaled icon
+	 * @since 0.0.0
+	 */
+	public static ImageIcon loadIcon(String name, Double targetWidth, Double targetHeight) {
 
 		var image = loadOptionalImage(name).orElseThrow();
 		var scaledImage = scale(image, targetWidth, targetHeight);

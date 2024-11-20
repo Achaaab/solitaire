@@ -9,6 +9,8 @@ import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.getTh
 import static java.lang.System.exit;
 
 /**
+ * Solitaire window listener. Reacts to window opened and window closing events.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */

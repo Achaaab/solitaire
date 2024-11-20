@@ -52,6 +52,8 @@ public class Solitaire {
 	}
 
 	/**
+	 * Resets this Solitaire.
+	 *
 	 * @since 0.0.0
 	 */
 	public void reset() {

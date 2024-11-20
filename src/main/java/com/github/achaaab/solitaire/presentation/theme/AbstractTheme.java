@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.Optional;
 
-import static com.github.achaaab.solitaire.utility.ResourceUtility.getIcon;
+import static com.github.achaaab.solitaire.utility.ResourceUtility.loadIcon;
 import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -97,7 +97,7 @@ public abstract class AbstractTheme implements Theme {
 	protected ImageIcon getImage(String imageName, Double targetWidth, Double targetHeight) {
 
 		var resourceName = "themes/" + name + "/images/" + imageName;
-		return getIcon(resourceName, targetWidth, targetHeight);
+		return loadIcon(resourceName, targetWidth, targetHeight);
 	}
 
 	@Override

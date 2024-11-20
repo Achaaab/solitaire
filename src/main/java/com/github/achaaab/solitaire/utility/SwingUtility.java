@@ -2,13 +2,10 @@ package com.github.achaaab.solitaire.utility;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Point;
+import java.awt.Container;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 
 import static java.awt.Toolkit.getDefaultToolkit;
-import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import static java.lang.Math.pow;
 import static java.lang.Math.round;
 
@@ -21,19 +18,29 @@ import static java.lang.Math.round;
 public class SwingUtility {
 
 	private static final Toolkit TOOLKIT = getDefaultToolkit();
-	private static final BufferedImage NO_CURSOR_IMAGE = new BufferedImage(1, 1, TYPE_INT_ARGB);
-	private static final Cursor NO_CURSOR = TOOLKIT.createCustomCursor(NO_CURSOR_IMAGE, new Point(0, 0), "no_cursor");
 	private static final float BASE_RESOLUTION = 72.0f;
 	private static final int RESOLUTION = TOOLKIT.getScreenResolution();
 
 	/**
-	 * Hides the mouse cursor on the given component.
+	 * Adds a component in a container and centers it.
 	 *
-	 * @param component component on which to hide the mouse cursor
+	 * @param component component to add
+	 * @param container container in which to add the component
 	 * @since 0.0.0
 	 */
-	public static void hideCursor(Component component) {
-		component.setCursor(NO_CURSOR);
+	public static void addCentered(Component component, Container container) {
+
+		var componentWidth = component.getWidth();
+		var componentHeight = component.getHeight();
+
+		var containerWidth = container.getWidth();
+		var containerHeight = container.getHeight();
+
+		component.setLocation(
+				(containerWidth - componentWidth) / 2,
+				(containerHeight - componentHeight) / 2);
+
+		container.add(component);
 	}
 
 	/**
