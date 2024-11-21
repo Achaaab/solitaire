@@ -24,6 +24,8 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.SwingUtilities.getWindowAncestor;
 
 /**
+ * Menu for a Solitaire that can be added in a window.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -81,7 +83,7 @@ public class SolitaireMenu extends JMenuBar {
 		var exit = new JMenuItem(bundle.getString("quit"));
 		setFontSize(exit, FONT_SIZE);
 		exit.setBorder(MENU_BORDER);
-		exit.addActionListener(this::fermerFenetre);
+		exit.addActionListener(this::closeWindow);
 
 		var turnedCardCount = solitaire.rules().getTurnedCardCount();
 		var recycleCount = solitaire.rules().getPassCount();
@@ -166,17 +168,21 @@ public class SolitaireMenu extends JMenuBar {
 	}
 
 	/**
-	 * @param event
+	 * Dispatches a {@link WindowEvent#WINDOW_CLOSING} event.
+	 *
+	 * @param event close action event
 	 * @since 0.0.0
 	 */
-	private void fermerFenetre(ActionEvent event) {
+	private void closeWindow(ActionEvent event) {
 
-		var window = getWindowAncestor(solitaire.presentation());
+		var window = getWindowAncestor(this);
 		window.dispatchEvent(new WindowEvent(window, WINDOW_CLOSING));
 	}
 
 	/**
-	 * @param event
+	 * First disables the Solitaire, then, in a parallel thread resets the Solitaire and enables it.
+	 *
+	 * @param event reset action event
 	 * @since 0.0.0
 	 */
 	private void reset(ActionEvent event) {
@@ -195,7 +201,9 @@ public class SolitaireMenu extends JMenuBar {
 	}
 
 	/**
-	 * @param event
+	 * Displays the message "About".
+	 *
+	 * @param event about action event
 	 * @since 0.0.0
 	 */
 	private void about(ActionEvent event) {

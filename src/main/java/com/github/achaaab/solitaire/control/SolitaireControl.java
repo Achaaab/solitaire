@@ -8,9 +8,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static java.awt.event.MouseEvent.BUTTON1;
-import static javax.swing.SwingUtilities.getWindowAncestor;
 
 /**
+ * Control part of a Solitaire component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -20,11 +21,16 @@ public class SolitaireControl extends Solitaire {
 	private final MessageControl message;
 
 	/**
+	 * Creates the control part of a Solitaire component.
+	 *
 	 * @since 0.0.0
 	 */
 	public SolitaireControl() {
 
 		super(ControlFactory.INSTANCE);
+
+		stock().setSolitaire(this);
+		waste().setSolitaire(this);
 
 		message = ControlFactory.INSTANCE.newMessage();
 		presentation = new SolitairePresentation(this);
@@ -52,48 +58,15 @@ public class SolitaireControl extends Solitaire {
 		for (var foundation : foundations()) {
 			((FoundationControl) foundation).setMessage(message);
 		}
-
-		stock().presentation().addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mousePressed(MouseEvent event) {
-
-				var button = event.getButton();
-
-				if (button == BUTTON1) {
-
-					if (canDeal()) {
-						deal();
-					} else if (canRecycle()) {
-						recycle();
-					}
-				}
-
-				stock().presentation().showState(canDeal(), canRecycle());
-			}
-		});
-
-		waste().presentation().addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent event) {
-
-				var button = event.getButton();
-				var clickCount = event.getClickCount();
-
-				if (button == BUTTON1 && clickCount == 2) {
-					moveToFoundation(waste);
-				}
-			}
-		});
 	}
 
-	@Override
-	public void reset() {
-
-		stock().presentation().showState(false, false);
-
-		super.reset();
+	/**
+	 * Updates the stock state, showing the user if he can recycle or not.
+	 *
+	 * @since 0.0.0
+	 */
+	public void updateStockState() {
+		stock().presentation().showState(canDeal(), canRecycle());
 	}
 
 	/**
@@ -113,21 +86,21 @@ public class SolitaireControl extends Solitaire {
 	}
 
 	/**
-	 * Disables the whole window ancestor.
+	 * Disables the presentation.
 	 *
 	 * @since 0.0.0
 	 */
 	public void disable() {
-		getWindowAncestor(presentation()).setEnabled(false);
+		presentation.disable();
 	}
 
 	/**
-	 * Enables the whole window ancestor.
+	 * Enables the presentation.
 	 *
 	 * @since 0.0.0
 	 */
 	public void enable() {
-		getWindowAncestor(presentation()).setEnabled(true);
+		presentation.enable();
 	}
 
 	/**

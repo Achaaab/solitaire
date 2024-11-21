@@ -17,8 +17,11 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.Box.createGlue;
 import static javax.swing.Box.createRigidArea;
 import static javax.swing.BoxLayout.LINE_AXIS;
+import static javax.swing.SwingUtilities.getWindowAncestor;
 
 /**
+ * Presentation part of a Solitaire component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -27,7 +30,9 @@ public class SolitairePresentation extends JPanel {
 	public static final Color BACKGROUND = new Color(20, 81, 22);
 
 	/**
-	 * @param control
+	 * Creates the presentation part of a Solitaire component.
+	 *
+	 * @param control control part of the solitaire component
 	 * @since 0.0.0
 	 */
 	public SolitairePresentation(SolitaireControl control) {
@@ -73,5 +78,23 @@ public class SolitairePresentation extends JPanel {
 
 		add(northPanel, NORTH);
 		add(pilesPanel, CENTER);
+	}
+
+	/**
+	 * Disables the whole window ancestor.
+	 *
+	 * @since 0.0.0
+	 */
+	public void disable() {
+		getWindowAncestor(this).setEnabled(false);
+	}
+
+	/**
+	 * Enables the whole window ancestor.
+	 *
+	 * @since 0.0.0
+	 */
+	public void enable() {
+		getWindowAncestor(this).setEnabled(true);
 	}
 }

@@ -5,6 +5,8 @@ import com.github.achaaab.solitaire.abstraction.Rank;
 import com.github.achaaab.solitaire.abstraction.Suit;
 
 /**
+ * Factory creating control parts of all Solitaire components.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */

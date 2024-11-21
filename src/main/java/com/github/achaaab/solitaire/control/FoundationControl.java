@@ -6,6 +6,8 @@ import com.github.achaaab.solitaire.presentation.FoundationPresentation;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 
 /**
+ * Control part of a Foundation component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -15,6 +17,8 @@ public class FoundationControl extends Foundation implements StackTargetControl,
 	private MessageControl message;
 
 	/**
+	 * Creates the control part of a Foundation component.
+	 *
 	 * @since 0.0.0
 	 */
 	public FoundationControl() {

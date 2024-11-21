@@ -6,6 +6,8 @@ import com.github.achaaab.solitaire.presentation.MessagePresentation;
 import static com.github.achaaab.solitaire.presentation.theme.ThemeManager.getTheme;
 
 /**
+ * Control part of a Message component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -13,7 +15,7 @@ public class MessageControl {
 
 	private final MessagePresentation presentation;
 
-	private String text;
+	private String html;
 	private boolean visible;
 
 	/**
@@ -23,34 +25,39 @@ public class MessageControl {
 
 		presentation = new MessagePresentation(this);
 
-		text = null;
+		html = null;
 		visible = false;
 	}
 
 	/**
-	 * @param text
+	 * Displays an HTML document.
+	 *
+	 * @param html HTML document to display
 	 * @since 0.0.0
 	 */
-	public void display(String text) {
+	public void display(String html) {
 
-		this.text = text;
+		this.html = html;
 
-		presentation.display(text);
+		presentation.display(html);
 		visible = true;
 	}
 
 	/**
+	 * Hides the current HTML document.
+	 *
 	 * @since 0.0.0
 	 */
 	public void hide() {
 
 		getTheme().getUnderstoodSound().ifPresent(SoundEffect::play);
+
 		visible = false;
 		presentation.setVisible(false);
 	}
 
 	/**
-	 * @return
+	 * @return whether there is a currently displayed HTML document
 	 * @since 0.0.0
 	 */
 	public boolean isVisible() {
@@ -58,15 +65,15 @@ public class MessageControl {
 	}
 
 	/**
-	 * @return
+	 * @return current HTML document
 	 * @since 0.0.0
 	 */
-	public String getText() {
-		return text;
+	public String getHtml() {
+		return html;
 	}
 
 	/**
-	 * @return
+	 * @return presentation part of this Message component
 	 * @since 0.0.0
 	 */
 	public MessagePresentation presentation() {

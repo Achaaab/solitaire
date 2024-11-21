@@ -20,8 +20,6 @@ import static javax.swing.SwingUtilities.invokeLater;
  */
 public class SolitaireWindow extends JFrame {
 
-	private final SolitaireControl control;
-
 	/**
 	 * Creates a window for a given Solitaire.
 	 *
@@ -31,8 +29,6 @@ public class SolitaireWindow extends JFrame {
 	public SolitaireWindow(SolitaireControl control) {
 
 		super("Solitaire");
-
-		this.control = control;
 
 		var dark = isDark(getBackground());
 
