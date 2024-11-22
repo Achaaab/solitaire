@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import java.util.Optional;
 
 /**
+ * Theme for a Solitaire presentation.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -24,48 +26,51 @@ public interface Theme {
 	double cardHeight();
 
 	/**
-	 * @return L'image du dos de la carte pour ce th�me
+	 * @return image representing a playing card turned face down
+	 * @since 0.0.0
 	 */
-	ImageIcon getCardBackImage();
+	ImageIcon getCardFaceDownImage();
 	
 	/**
-	 * @param cardName
-	 * @return L'image de la face de la carte pour ce thème
+	 * @param cardName name of the card
+	 * @return image representing the playing card turned face up
+	 * @since 0.0.0
 	 */
-	ImageIcon getCardFrontImage(String cardName);
+	ImageIcon getCardFaceUpIMage(String cardName);
 
 	/**
-	 * @return
+	 * @return sound to play when a card is placed on a stack
+	 * @since 0.0.0
 	 */
 	Optional<SoundEffect> getPushCardSound();
 
 	/**
-	 * @return
+	 * @return sound to play when a card is removed from a stack
+	 * @since 0.0.0
 	 */
 	Optional<SoundEffect> getPopCardSound();
 
 	/**
-	 * @return un son pour l'evenement : le sabot est retourne
-	 */
-	Optional<SoundEffect> getTalonRecyclingSound();
-
-	/**
-	 * @return un son pour l'evenement : validation d'un message d'explication
+	 * @return sound to play when the user validate a help message
+	 * @since 0.0.0
 	 */
 	Optional<SoundEffect> getUnderstoodSound();
 
 	/**
-	 * @return un son pour l'evenement : fin du programme
+	 * @return sound to play when the user closes the main window
+	 * @since 0.0.0
 	 */
 	Optional<SoundEffect> getExitSound();
 
 	/**
-	 * @return un son pour l'evenement : debut du programme
+	 * @return sound to play when the main window is opened
+	 * @since 0.0.0
 	 */
 	Optional<SoundEffect> getStartSound();
 
 	/**
-	 * @return un son pour l'evenement : victoire
+	 * @return sound to play when the user wins a game
+	 * @since 0.0.0
 	 */
 	Optional<SoundEffect> getWinSound();
 }

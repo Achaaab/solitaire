@@ -1,8 +1,11 @@
 package com.github.achaaab.solitaire.utility;
 
+import javax.swing.AbstractButton;
+import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import static java.awt.Toolkit.getDefaultToolkit;
@@ -20,6 +23,49 @@ public class SwingUtility {
 	private static final Toolkit TOOLKIT = getDefaultToolkit();
 	private static final float BASE_RESOLUTION = 72.0f;
 	private static final int RESOLUTION = TOOLKIT.getScreenResolution();
+
+	private static final int SCROLL_BAR_THICKNESS = scale(18);
+	private static final int SCROLL_BAR_BUTTON_SIZE = scale(18);
+
+	/**
+	 * Creates a scroll pane and adds the given component in it.
+	 * This helper aims to adapt the scroll pane components (track, buttons, thumb...) to scale with the
+	 * pixel density of the monitor.
+	 *
+	 * @param component component to add into a scroll pane
+	 * @param opaque whether to set the scroll pane opaque
+	 * @return created scroll pane
+	 * @since 0.0.0
+	 */
+	public static JScrollPane scrollPane(Component component, boolean opaque) {
+
+		var scrollPane = new JScrollPane(component);
+
+		scrollPane.setOpaque(opaque);
+		scrollPane.getViewport().setOpaque(opaque);
+
+		var verticalScrollBar = scrollPane.getVerticalScrollBar();
+		var horizontalScrollBar = scrollPane.getHorizontalScrollBar();
+
+		verticalScrollBar.setPreferredSize(new Dimension(SCROLL_BAR_THICKNESS, 0));
+		horizontalScrollBar.setPreferredSize(new Dimension(0, SCROLL_BAR_THICKNESS));
+
+		for (var scrollBarComponent : verticalScrollBar.getComponents()) {
+
+			if (scrollBarComponent instanceof AbstractButton button) {
+				button.setPreferredSize(new Dimension(0, SCROLL_BAR_BUTTON_SIZE));
+			}
+		}
+
+		for (var scrollBarComponent : horizontalScrollBar.getComponents()) {
+
+			if (scrollBarComponent instanceof AbstractButton button) {
+				button.setPreferredSize(new Dimension(SCROLL_BAR_BUTTON_SIZE, 0));
+			}
+		}
+
+		return scrollPane;
+	}
 
 	/**
 	 * Adds a component in a container and centers it.

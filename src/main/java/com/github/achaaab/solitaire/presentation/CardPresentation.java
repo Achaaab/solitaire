@@ -32,10 +32,10 @@ public class CardPresentation extends JComponent {
 
 		var theme = getTheme();
 
-		var name = control.getRank().toString() + control.getSuit().getLetter();
+		var name = control.rank().toString() + control.suit().getLetter();
 
-		var frontImage = theme.getCardFrontImage(name);
-		var backImage = theme.getCardBackImage();
+		var frontImage = theme.getCardFaceUpIMage(name);
+		var backImage = theme.getCardFaceDownImage();
 
 		var width = computeWidth(1.0);
 		var height = computeHeight(1.0);

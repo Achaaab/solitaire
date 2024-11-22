@@ -38,8 +38,8 @@ public class Stack extends LinkedList<Card> {
 			var card0 = get(index);
 			var card1 = get(index + 1);
 
-			alternate = card0.getRank().ordinal() == card1.getRank().ordinal() - 1 &&
-					card0.getSuit().isRed() != card1.getSuit().isRed();
+			alternate = card0.rank().ordinal() == card1.rank().ordinal() - 1 &&
+					card0.suit().isRed() != card1.suit().isRed();
 		}
 
 		return alternate;

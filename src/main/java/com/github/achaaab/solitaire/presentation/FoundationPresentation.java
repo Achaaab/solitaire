@@ -36,7 +36,7 @@ public class FoundationPresentation extends StackPresentation
 
 		MISSED_DROP_MESSAGE = getMessage("messages/foundation.html", Map.of(
 				"font_size", scale(16),
-				"card_font_size", scale(32),
+				"card_font_size", scale(40),
 				"item_margin", scale(6)));
 	}
 

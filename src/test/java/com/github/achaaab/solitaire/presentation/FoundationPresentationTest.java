@@ -28,8 +28,8 @@ public class FoundationPresentationTest {
 		var deck = ControlFactory.INSTANCE.newDeck();
 
 		var spades = deck.stream().
-				filter(card -> card.getSuit() == SPADE).
-				sorted(comparing(Card::getRank));
+				filter(card -> card.suit() == SPADE).
+				sorted(comparing(Card::rank));
 
 		var foundation = ControlFactory.INSTANCE.newFoundation();
 

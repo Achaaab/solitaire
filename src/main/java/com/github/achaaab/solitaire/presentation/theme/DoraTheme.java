@@ -9,6 +9,8 @@ import java.util.Optional;
 import static java.lang.Math.random;
 
 /**
+ * Theme inspired by a parody of Dora The Explorer.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -17,19 +19,21 @@ public class DoraTheme extends AbstractTheme {
 	public static final DoraTheme INSTANCE = new DoraTheme();
 
 	/**
+	 * Creates a theme inspired by a parody of Dora The Explorer.
 	 *
+	 * @since 0.0.0
 	 */
 	private DoraTheme() {
 		super("dora");
 	}
 
 	@Override
-	public ImageIcon getCardBackImage() {
+	public ImageIcon getCardFaceDownImage() {
 		return getImage("back.png", cardWidth(), cardHeight());
 	}
 
 	@Override
-	public ImageIcon getCardFrontImage(String cardName) {
+	public ImageIcon getCardFaceUpIMage(String cardName) {
 		return getImage(cardName + ".png", cardWidth(), cardHeight());
 	}
 
@@ -56,11 +60,6 @@ public class DoraTheme extends AbstractTheme {
 	@Override
 	public Optional<SoundEffect> getExitSound() {
 		return random() < 0.5 ? getSoundEffect("goodBye") : getSoundEffect("voilaCestLaFinDeNotreAventure");
-	}
-
-	@Override
-	public Optional<SoundEffect> getTalonRecyclingSound() {
-		return getSoundEffect("bruitEtoileTeleMagique");
 	}
 
 	@Override

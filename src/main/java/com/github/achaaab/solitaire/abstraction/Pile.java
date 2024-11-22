@@ -33,15 +33,15 @@ public class Pile extends Stack {
 
 		if (isEmpty()) {
 
-			canPush = card.getRank() == KING;
+			canPush = card.rank() == KING;
 
 		} else {
 
 			var firstCard = getFirst();
 
 			canPush = firstCard.isFaceUp() &&
-					firstCard.getRank().ordinal() == card.getRank().ordinal() + 1 &&
-					firstCard.getSuit().isRed() != card.getSuit().isRed();
+					firstCard.rank().ordinal() == card.rank().ordinal() + 1 &&
+					firstCard.suit().isRed() != card.suit().isRed();
 		}
 
 		return canPush;

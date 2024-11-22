@@ -15,6 +15,8 @@ import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
+ * Theme for a Solitaire presentation.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -24,13 +26,18 @@ public abstract class AbstractTheme implements Theme {
 
 	protected static final int DEFAULT_CARD_WIDTH = SwingUtility.scale(90.00f);
 	protected static final int DEFAULT_CARD_HEIGHT = SwingUtility.scale(130.68f);
+	protected static final String DEFAULT_CARD_FACE_DOWN_IMAGE = "back.png";
 
 	private final String name;
 
 	private final Map<String, SoundEffect> soundEffects;
 
+	private ImageIcon cardFaceDownImage;
+
 	/**
-	 * @param name
+	 * Creates a new theme for a Solitaire presentation.
+	 *
+	 * @param name name of the theme to create
 	 * @since 0.0.0
 	 */
 	public AbstractTheme(String name) {
@@ -38,6 +45,7 @@ public abstract class AbstractTheme implements Theme {
 		this.name = name;
 
 		soundEffects = new HashMap<>();
+		cardFaceDownImage = null;
 	}
 
 	@Override
@@ -48,6 +56,16 @@ public abstract class AbstractTheme implements Theme {
 	@Override
 	public double cardHeight() {
 		return DEFAULT_CARD_HEIGHT;
+	}
+
+	@Override
+	public ImageIcon getCardFaceDownImage() {
+
+		if (cardFaceDownImage == null) {
+			cardFaceDownImage = getImage(DEFAULT_CARD_FACE_DOWN_IMAGE, cardWidth(), cardHeight());
+		}
+
+		return cardFaceDownImage;
 	}
 
 	/**
@@ -122,11 +140,6 @@ public abstract class AbstractTheme implements Theme {
 
 	@Override
 	public Optional<SoundEffect> getExitSound() {
-		return Optional.empty();
-	}
-
-	@Override
-	public Optional<SoundEffect> getTalonRecyclingSound() {
 		return Optional.empty();
 	}
 

@@ -6,6 +6,8 @@ import com.github.achaaab.solitaire.presentation.PilePresentation;
 import com.github.achaaab.solitaire.presentation.PresentationFactory;
 
 /**
+ * Control part of a Pile component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -16,6 +18,8 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	private DraggedStack draggedOutStack;
 
 	/**
+	 * Creates the control part of a Pile component.
+	 *
 	 * @since 0.0.0
 	 */
 	public PileControl() {

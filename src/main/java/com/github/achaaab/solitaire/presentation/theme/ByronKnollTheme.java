@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import java.util.Optional;
 
 /**
+ * Theme built with playing cards images provided by Byron Knoll.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -14,19 +16,16 @@ public class ByronKnollTheme extends AbstractTheme {
 	public static final ByronKnollTheme INSTANCE = new ByronKnollTheme();
 
 	/**
+	 * Creates a new Byron Knoll theme.
 	 *
+	 * @since 0.0.0
 	 */
 	private ByronKnollTheme() {
 		super("byron_knoll");
 	}
 
 	@Override
-	public ImageIcon getCardBackImage() {
-		return getImage("back.png", cardWidth(), cardHeight());
-	}
-
-	@Override
-	public ImageIcon getCardFrontImage(String cardName) {
+	public ImageIcon getCardFaceUpIMage(String cardName) {
 		return getImage(cardName + ".png", cardWidth(), cardHeight());
 	}
 

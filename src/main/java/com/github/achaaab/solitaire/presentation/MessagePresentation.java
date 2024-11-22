@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 
 import static com.github.achaaab.solitaire.utility.SwingUtility.scale;
 import static com.github.achaaab.solitaire.utility.SwingUtility.scaleFloat;
+import static com.github.achaaab.solitaire.utility.SwingUtility.scrollPane;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.SOUTH;
 import static java.awt.Desktop.getDesktop;
@@ -27,6 +28,8 @@ import static javax.swing.event.HyperlinkEvent.EventType.ACTIVATED;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
+ * Presentation part of a Message component.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -52,7 +55,9 @@ public class MessagePresentation extends JPanel {
 	private final JEditorPane textArea;
 
 	/**
-	 * @param control
+	 * Creates the presentation part of a Message component.
+	 *
+	 * @param control control part of the Message component
 	 * @since 0.0.0
 	 */
 	public MessagePresentation(MessageControl control) {
@@ -75,7 +80,7 @@ public class MessagePresentation extends JPanel {
 
 		setLayout(new BorderLayout());
 
-		add(textArea, CENTER);
+		add(scrollPane(textArea, false), CENTER);
 		add(buttonPanel, SOUTH);
 
 		ok.addActionListener(event -> control.hide());

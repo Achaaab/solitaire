@@ -35,7 +35,7 @@ public class PilePresentation extends StackPresentation
 
 		MISSED_DROP_MESSAGE = getMessage("messages/pile.html", Map.of(
 				"font_size", scale(16),
-				"card_font_size", scale(32),
+				"card_font_size", scale(40),
 				"item_margin", scale(6)));
 	}
 

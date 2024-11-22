@@ -1,6 +1,9 @@
 package com.github.achaaab.solitaire.abstraction;
 
 /**
+ * A playing card, defined by its rank and its suit.
+ * A card is not immutable, it can be turned face up or face down.
+ *
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
@@ -16,8 +19,9 @@ public class Card {
 	/**
 	 * Creates a new card, initially turned face down.
 	 *
-	 * @param rank
-	 * @param suit
+	 * @param rank rank of the card to create
+	 * @param suit suit of the card to create
+	 * @since 0.0.0
 	 */
 	public Card(Rank rank, Suit suit) {
 
@@ -28,18 +32,18 @@ public class Card {
 	}
 
 	/**
-	 * @return
+	 * @return rank of this card
 	 * @since 0.0.0
 	 */
-	public Rank getRank() {
+	public Rank rank() {
 		return rank;
 	}
 
 	/**
-	 * @return
+	 * @return suit of this card
 	 * @since 0.0.0
 	 */
-	public Suit getSuit() {
+	public Suit suit() {
 		return suit;
 	}
 
