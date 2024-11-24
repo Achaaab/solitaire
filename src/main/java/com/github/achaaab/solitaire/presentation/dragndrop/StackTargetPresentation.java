@@ -14,5 +14,7 @@ public interface StackTargetPresentation {
 	/**
 	 * @since 0.0.0
 	 */
-	void rejectDrop();
+	default void rejectDrop() {
+
+	}
 }

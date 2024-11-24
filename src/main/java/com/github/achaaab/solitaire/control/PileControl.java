@@ -74,9 +74,7 @@ public class PileControl extends Pile implements StackSourceControl, StackTarget
 	@Override
 	public void drop(DraggedStack stack) {
 
-		var accepted = stack == draggedOutStack || canPush(stack);
-
-		if (accepted) {
+		if (stack == draggedOutStack || canPush(stack)) {
 
 			var temporaryStack = ControlFactory.INSTANCE.newStack();
 			temporaryStack.push(stack);

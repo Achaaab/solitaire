@@ -78,11 +78,4 @@ public class DropTargetManager extends DropTargetAdapter {
 	public void acceptDrop() {
 		incomingEvent.getDropTargetContext().dropComplete(true);
 	}
-
-	/**
-	 * @since 0.0.0
-	 */
-	public void rejectDrop() {
-		incomingEvent.rejectDrop();
-	}
 }

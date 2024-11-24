@@ -16,10 +16,11 @@ import static java.awt.event.MouseEvent.BUTTON1;
  * @author Jonathan Guéhenneux
  * @since 0.0.0
  */
-public class WasteControl extends Waste implements StackSourceControl {
+public class WasteControl extends Waste implements StackSourceControl, StackTargetControl {
 
 	private final WastePresentation presentation;
 	private SolitaireControl solitaire;
+	private DraggedStack draggedOutStack;
 
 	/**
 	 * Creates the control part of a Waste component.
@@ -86,9 +87,9 @@ public class WasteControl extends Waste implements StackSourceControl {
 		if (card == getFirst()) {
 
 			var sourceLocation = card.presentation().getLocation();
-			var transferableStack = ControlFactory.INSTANCE.newDraggedStack(1);
-			transferableStack.push(pop());
-			presentation.initiateDragAndDrop(sourceLocation, transferableStack);
+			draggedOutStack = ControlFactory.INSTANCE.newDraggedStack(1);
+			draggedOutStack.push(pop());
+			presentation.initiateDragAndDrop(sourceLocation, draggedOutStack);
 		}
 	}
 
@@ -98,5 +99,34 @@ public class WasteControl extends Waste implements StackSourceControl {
 	 */
 	public WastePresentation presentation() {
 		return presentation;
+	}
+
+	@Override
+	public void dragIn(DraggedStack stack) {
+		stack.showAccepted(stack == draggedOutStack);
+	}
+
+	@Override
+	public void drop(DraggedStack stack) {
+
+		if (stack == draggedOutStack) {
+
+			push(stack.pop());
+			presentation.acceptDrop();
+
+		} else {
+
+			presentation.rejectDrop();
+		}
+	}
+
+	/**
+	 * Displays an HTML document as a message for the user.
+	 *
+	 * @param text HTML document to display
+	 * @since 0.0.0
+	 */
+	public void displayMessage(String text) {
+		solitaire.message().display(text);
 	}
 }

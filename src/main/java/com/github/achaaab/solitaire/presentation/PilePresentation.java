@@ -66,8 +66,6 @@ public class PilePresentation extends StackPresentation
 	@Override
 	public void rejectDrop() {
 
-		dropTargetManager.rejectDrop();
-
 		missedDropCount++;
 
 		if (missedDropCount == MISSED_DROP_COUNT_BEFORE_HELP) {
